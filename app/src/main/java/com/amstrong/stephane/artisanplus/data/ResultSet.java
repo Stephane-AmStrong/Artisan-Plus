@@ -54,7 +54,7 @@ public class ResultSet {
     private String[] prenomGerant ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","Grace","Oscar"};
     private String[] nomCategories ={"Salon de beauté","Construction & BTP","Salon de beauté","Patisserie","Commerce Général"};
     private String[][] lesProfession ={{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"},{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"}};
-
+    //private String[][] lesDescriptions ={{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"},{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"}};
     public List<Gerant> getGerant(){
         lstGeran = new ArrayList<>();
         for (int i =0;i<imgGerant.length;i++){
