@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/row_entreprise"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    >
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ger_img"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/bckgrnd_1"
+            app:civ_border_color="#000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ent_nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Nom artelier"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ger_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/entr_activ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Nom de Profession 1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toEndOf="@+id/ger_img"
+            app:layout_constraintTop_toBottomOf="@+id/ent_nom" />
+
+        <TextView
+            android:id="@+id/entr_activ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Nom de Profession 2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toEndOf="@+id/ger_img"
+            app:layout_constraintTop_toBottomOf="@+id/entr_activ1" />
+
+
+        <TextView
+            android:id="@+id/entr_activ3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Nom de Profession 3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            app:layout_constraintStart_toEndOf="@+id/ger_img"
+            app:layout_constraintTop_toBottomOf="@+id/entr_activ2" />
+
+        <RatingBar
+            android:id="@+id/ent_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:numStars="5"
+            android:rating="2.5"
+            app:layout_constraintStart_toEndOf="@+id/ger_img"
+            app:layout_constraintTop_toBottomOf="@+id/entr_activ3"/>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

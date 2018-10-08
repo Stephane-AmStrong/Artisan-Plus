@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#E6E6E6">
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#dfdfdf"
+        tools:context=".activity.AtelierActivity">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_entreprise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/atlier_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/bckgrnd_1" />
+
+                <TextView
+                    android:id="@+id/atlier_nom"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/black_gradient"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginStart="0dp"
+                    android:gravity="bottom"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="24dp"
+                    android:text="Mahu Wenan coiffure"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="#FFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/atlier_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:numStars="5"
+                    android:rating="2.5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/atlier_img" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_entreprise">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/ico_pictures"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_menu_camera"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_pictures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Images"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintStart_toEndOf="@+id/ico_pictures" />
+
+                <View
+                    android:id="@+id/separator4"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_pictures"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/pictures_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/separator4">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_activite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_picture">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/ico_activite"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_activite"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Activités"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintStart_toEndOf="@+id/ico_activite" />
+
+                <View
+                    android:id="@+id/separator"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_activite"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ativites_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="#FFF"
+                    app:layout_constraintTop_toBottomOf="@+id/separator">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_localisation"
+            android:layout_width="match_parent"
+            android:layout_height="192dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_activite">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ico_map"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_map"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textSieges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Sièges"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintTop_toTopOf="@+id/ico_map"
+                    app:layout_constraintStart_toEndOf="@+id/ico_map" />
+
+                <View
+                    android:id="@+id/separatorSieges"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_map"/>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/map_entreprise"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/separatorSieges">
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/block_gerant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_localisation"
+            android:clickable="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingLeft="4dp">
+
+                <ImageView
+                    android:id="@+id/ico_gerant"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_gerant"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_gerant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Gérant"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintStart_toEndOf="@+id/ico_gerant" />
+
+                <View
+                    android:id="@+id/separator5"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_gerant"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ger_img"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/profil_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/separator5" />
+
+
+                <TextView
+                    android:id="@+id/txt_ger_nom_prenoms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:text="Nom et Prénoms Gérant"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorText"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/ger_img"
+                    app:layout_constraintTop_toTopOf="@+id/ger_img" />
+
+                <ImageView
+                    android:id="@+id/btn_ger_tel1"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_call"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txt_ger_tel1"/>
+
+                <View
+                    android:id="@+id/separator6"
+                    android:layout_width="0.1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_ger_tel1"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel1"
+                    app:layout_constraintTop_toTopOf="@+id/btn_ger_tel1" />
+
+                <ImageView
+                    android:id="@+id/btn_ger_sms1"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_texto"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel1"
+                    app:layout_constraintTop_toTopOf="@+id/btn_ger_tel1"/>
+
+                <TextView
+                    android:id="@+id/txt_ger_tel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="+229 97 99 99 99"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_ger_tel2"
+                    app:layout_constraintStart_toEndOf="@+id/ger_img"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_ger_nom_prenoms"
+                    android:textColor="@color/colorText"/>
+
+                <ImageView
+                    android:id="@+id/btn_ger_tel2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_call"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txt_ger_tel2" />
+
+                <View
+                    android:id="@+id/separator7"
+                    android:layout_width="0.1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_ger_tel2"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel2"
+                    app:layout_constraintTop_toTopOf="@+id/btn_ger_tel2" />
+
+                <ImageView
+                    android:id="@+id/btn_ger_sms2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_texto"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel2"
+                    app:layout_constraintTop_toTopOf="@+id/btn_ger_tel2" />
+
+
+                <TextView
+                    android:id="@+id/txt_ger_tel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:text="+229 95 76 67 43"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@+id/ger_img"
+                    app:layout_constraintStart_toEndOf="@+id/ger_img" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>
