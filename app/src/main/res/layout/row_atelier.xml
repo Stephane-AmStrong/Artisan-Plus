@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/row_entreprise"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:foreground="?android:attr/selectableItemBackground"
@@ -42,54 +42,32 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/entr_activ1"
-            android:layout_width="wrap_content"
+            android:id="@+id/atlier_descript"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            android:text="Nom de Profession 1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:inputType="textMultiLine"
+            android:text="Description"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ger_img"
             app:layout_constraintTop_toBottomOf="@+id/ent_nom" />
-
-        <TextView
-            android:id="@+id/entr_activ2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="Nom de Profession 2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            app:layout_constraintStart_toEndOf="@+id/ger_img"
-            app:layout_constraintTop_toBottomOf="@+id/entr_activ1" />
-
-
-        <TextView
-            android:id="@+id/entr_activ3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="Nom de Profession 3"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintStart_toEndOf="@+id/ger_img"
-            app:layout_constraintTop_toBottomOf="@+id/entr_activ2" />
 
         <RatingBar
             android:id="@+id/ent_rating"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
             android:numStars="5"
             android:rating="2.5"
-            app:layout_constraintStart_toEndOf="@+id/ger_img"
-            app:layout_constraintTop_toBottomOf="@+id/entr_activ3"/>
+            app:layout_constraintBottom_toBottomOf="@+id/ger_img"
+            app:layout_constraintStart_toEndOf="@+id/ger_img" />
 
 
 

@@ -11,28 +11,28 @@ public class Atelier implements Parcelable{
     private int image;
     private int id;
     private String nom;
+    private String description;
     private Categorie categorie;
     private float etoile;
-    private List<Activite> lstActivite;
     private List<Integer> lstPictures = new ArrayList<Integer>();
     private Gerant gerant;
 
-    public Atelier(int image, int id, String nom, Categorie categorie, float etoile, List<Activite> lstActivite, Gerant gerant) {
+    public Atelier(int image, int id, String nom, String description, Categorie categorie, float etoile, Gerant gerant) {
         this.image = image;
         this.id = id;
         this.nom = nom;
+        this.description = description;
         this.categorie = categorie;
         this.etoile = etoile;
-        this.lstActivite = lstActivite;
         this.gerant = gerant;
     }
 
-    public Atelier(int image, int id, String nom, float etoile, List<Activite> lstActivite, Gerant gerant) {
+    public Atelier(int image, int id, String nom, String description, float etoile, Gerant gerant) {
         this.image = image;
         this.id = id;
         this.nom = nom;
+        this.description = description;
         this.etoile = etoile;
-        this.lstActivite = lstActivite;
         this.gerant = gerant;
     }
 
@@ -40,9 +40,9 @@ public class Atelier implements Parcelable{
         image = in.readInt();
         id = in.readInt();
         nom = in.readString();
+        description = in.readString();
         categorie = in.readParcelable(Categorie.class.getClassLoader());
         etoile = in.readFloat();
-        lstActivite = in.createTypedArrayList(Activite.CREATOR);
         in.readList(lstPictures,null);
         gerant = in.readParcelable(Gerant.class.getClassLoader());
     }
@@ -79,14 +79,12 @@ public class Atelier implements Parcelable{
         parcel.writeInt(image);
         parcel.writeInt(id);
         parcel.writeString(nom);
+        parcel.writeString(description);
         parcel.writeParcelable(categorie, i);
         parcel.writeFloat(etoile);
-        parcel.writeTypedList(lstActivite);
         parcel.writeList(lstPictures);
         parcel.writeParcelable(gerant, i);
     }
-    //
-
 
     public int getImage() {
         return image;
@@ -112,6 +110,14 @@ public class Atelier implements Parcelable{
         this.nom = nom;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Categorie getCategorie() {
         return categorie;
     }
@@ -126,14 +132,6 @@ public class Atelier implements Parcelable{
 
     public void setEtoile(float etoile) {
         this.etoile = etoile;
-    }
-
-    public List<Activite> getLstActivite() {
-        return lstActivite;
-    }
-
-    public void setLstActivite(List<Activite> lstActivite) {
-        this.lstActivite = lstActivite;
     }
 
     public List<Integer> getLstPictures() {
