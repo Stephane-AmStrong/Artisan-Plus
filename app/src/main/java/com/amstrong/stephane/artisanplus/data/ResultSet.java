@@ -3,7 +3,6 @@ package com.amstrong.stephane.artisanplus.data;
 
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.model.Activite;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Categorie;
 import com.amstrong.stephane.artisanplus.model.Gerant;
@@ -17,14 +16,12 @@ public class ResultSet {
     private Atelier atelier;
     private List<Categorie> lstCategorie;
     private List<Gerant>lstGeran;
-    private List<Activite>lstActivite;
     private List<Atelier> lstAtelierMatching;
 
     public ResultSet() {
         lstAtelier = new ArrayList<>();
         lstCategorie = new ArrayList<>();
         lstGeran = new ArrayList<>();
-        lstActivite = new ArrayList<>();
         lstAtelierMatching=new ArrayList<>();
         this.getEntreprise();
         getCategories();
@@ -53,8 +50,12 @@ public class ResultSet {
     private String[] nomGerant ={"BIO","TALO","Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
     private String[] prenomGerant ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","Grace","Oscar"};
     private String[] nomCategories ={"Salon de beauté","Construction & BTP","Salon de beauté","Patisserie","Commerce Général"};
+<<<<<<< HEAD
     private String[][] lesProfession ={{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"},{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"}};
     //private String[][] lesDescriptions ={{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"},{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"}};
+=======
+    private String[] lesDescription ={"Salon de coiffure,Décoration intérieur et Commerce de pagne","Construction,Menuserie et Charpenterie","Couture,Stylisme et recyclage","Boulangerie,Vente de pain et fabrique de gateau","Super Marché,vente de divers et vente de cosmétique","Salon de coiffure,Décoration intérieur et Commerce de pagne","Construction,Menuserie et Charpenterie","Couture,Stylisme et recyclage","Boulangerie,Vente de pain et fabrique de gateau","Super Marché,vente de divers et vente de cosmétique"};
+>>>>>>> beta
     public List<Gerant> getGerant(){
         lstGeran = new ArrayList<>();
         for (int i =0;i<imgGerant.length;i++){
@@ -70,17 +71,11 @@ public class ResultSet {
 
         for (int i = 0; i< imgAtelier.length; i++){
             List<Categorie> lstProfess = new ArrayList<>();
-            List<Activite> lstActiv = new ArrayList<>();
 
-            for (int j = 0;j<3;j++){
-                lstProfess.add(new Categorie(lesProfession[i][j]));
-            }
+            // descritpion
+            lstProfess.add(new Categorie(lesDescription[i]));
 
-            for (int j =0;j<3;j++){
-                lstActiv.add(new Activite(ids[j],lstProfess.get(j)));
-            }
-
-            atelier = new Atelier(imgAtelier[i],ids[i], nomAtelier[i], ratings[i],lstActiv,lstGeran.get(i));
+            atelier = new Atelier(imgAtelier[i],ids[i], nomAtelier[i],lesDescription[i], ratings[i],lstGeran.get(i));
 
             for (int j=0;j<tabPicture[i].length;j++){
                 atelier.addPicture(tabPicture[i][j]);
@@ -144,13 +139,5 @@ public class ResultSet {
     public List<Gerant> getLstGeran() {
         return lstGeran;
     }
-
-    public List<Activite> getLstActivite() {
-        return lstActivite;
-    }
-
-
-
-
 
 }

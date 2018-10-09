@@ -54,7 +54,13 @@
         <activity android:name=".activity.RechercherActivity" />
         <activity
             android:name=".activity.MapsActivity"
+<<<<<<< HEAD
             android:label="@string/title_activity_maps"></activity>
+=======
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".activity.RechercherActivity" />
+        <activity android:name=".activity.ProfilActivity"></activity>
+>>>>>>> beta
     </application>
 
 </manifest>

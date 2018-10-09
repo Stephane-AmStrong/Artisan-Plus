@@ -19,9 +19,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.ActiviteAdapter;
 import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
-import com.amstrong.stephane.artisanplus.model.Activite;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Gerant;
 import com.google.android.gms.maps.MapFragment;
@@ -34,7 +32,6 @@ public class AtelierActivity extends AppCompatActivity {
     private Intent intent;
     private Atelier atelier;
     private Gerant gerant;
-    private List<Activite> lstActivite;
     private List<Integer> lstPicture;
     private ImageView btnTel1,btnTel2,btnSMS1,btnSMS2;
     private TextView txtPicture;
@@ -42,10 +39,8 @@ public class AtelierActivity extends AppCompatActivity {
     private String entrepriseKey = MainActivity.keyEntreprise;
     private RatingBar atlierRating;
     private ImageView imgAtelier,imgGerant;
-    private TextView txtNomEntr,txtNomPrenom,txtTel1,txtTel2;
-    private ActiviteAdapter activiteAdapter;
+    private TextView txtNomEntr,txtNomPrenom,txtTel1,txtTel2, txtDescriptEntr;
     private PictureAdapter pictureAdapter;
-    private RecyclerView activiteRecycler;
     private RecyclerView pictureRecycler;
     private Fragment fragment;
     private Intent intentRechercher;
@@ -59,7 +54,7 @@ public class AtelierActivity extends AppCompatActivity {
 
         initialisation();
 
-        loadEntreprise(atelier,lstActivite,gerant);
+        loadEntreprise(atelier,gerant);
 
         mMapFragment = MapFragment.newInstance();
         FragmentTransaction fragmentTransaction =
@@ -148,7 +143,6 @@ public class AtelierActivity extends AppCompatActivity {
     private void initialisation(){
         intent = getIntent();
         atelier =intent.getParcelableExtra(entrepriseKey);
-        lstActivite= atelier.getLstActivite();
         lstPicture= atelier.getLstPictures();
         gerant= atelier.getGerant();
         //
@@ -156,11 +150,11 @@ public class AtelierActivity extends AppCompatActivity {
         imgGerant=findViewById(R.id.ger_img);
         atlierRating=findViewById(R.id.atlier_rating);
         txtNomEntr = findViewById(R.id.atlier_nom);
+        txtDescriptEntr = findViewById(R.id.description_entreprise);
         txtPicture = findViewById(R.id.text_pictures);
         txtNomPrenom= findViewById(R.id.txt_ger_nom_prenoms);
         txtTel1= findViewById(R.id.txt_ger_tel1);
         txtTel2 = findViewById(R.id.txt_ger_tel2);
-        activiteRecycler = findViewById(R.id.ativites_recycler);
         pictureRecycler = findViewById(R.id.pictures_recycler);
 
         btnTel1 =findViewById(R.id.btn_ger_tel1);
@@ -171,7 +165,7 @@ public class AtelierActivity extends AppCompatActivity {
         intentRechercher = new Intent(this,RechercherActivity.class);
     }
 
-    private void loadEntreprise(Atelier atelier, List<Activite> lstActivite, Gerant gerant){
+    private void loadEntreprise(Atelier atelier, Gerant gerant){
         imgAtelier.setImageResource(atelier.getImage());
         atlierRating.setRating(atelier.getEtoile());
         imgGerant.setImageResource(atelier.getGerant().getPicture());
@@ -185,6 +179,7 @@ public class AtelierActivity extends AppCompatActivity {
 
         */
         txtNomEntr .setText(atelier.getNom());
+        txtDescriptEntr .setText(atelier.getDescription());
         if(lstPicture.size()<1) {
             txtPicture .setText("Image ("+lstPicture.size()+")");
         } else {
@@ -198,10 +193,6 @@ public class AtelierActivity extends AppCompatActivity {
         pictureAdapter = new PictureAdapter(this, lstPicture);
         pictureRecycler.setAdapter(pictureAdapter);
         pictureRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        //
-        activiteAdapter = new ActiviteAdapter(this, lstActivite);
-        activiteRecycler.setAdapter(activiteAdapter);
-        activiteRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void loadPhoto(ImageView imageView, int width, int height) {

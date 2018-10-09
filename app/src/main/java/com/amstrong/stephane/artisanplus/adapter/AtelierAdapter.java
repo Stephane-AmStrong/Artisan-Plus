@@ -51,30 +51,12 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
                     .load(atelier.getImage())
                     .resize(120,120)
                     .centerCrop()
-                    .into(holder.ImgAtelier);
+                    .into(holder.imgAtelier);
 
-            holder.TxtEntrepriseNom.setText(atelier.getNom());
-
-            switch (atelier.getLstActivite().size()){
-                case 1:
-                    holder.TxtActivite1.setText(atelier.getLstActivite().get(0).getCategorie().getLibelle());
-                    holder.TxtActivite2.setVisibility(View.INVISIBLE);
-                    holder.TxtActivite3.setVisibility(View.INVISIBLE);
-                    break;
-                case 2:
-                    holder.TxtActivite1.setText(atelier.getLstActivite().get(0).getCategorie().getLibelle());
-                    holder.TxtActivite2.setText(atelier.getLstActivite().get(1).getCategorie().getLibelle());
-                    holder.TxtActivite3.setVisibility(View.INVISIBLE);
-                    break;
-                default:
-                    holder.TxtActivite1.setText(atelier.getLstActivite().get(0).getCategorie().getLibelle());
-                    holder.TxtActivite2.setText(atelier.getLstActivite().get(1).getCategorie().getLibelle());
-                    holder.TxtActivite3.setText(atelier.getLstActivite().get(2).getCategorie().getLibelle());
-                    break;
-            }
+            holder.txtEntrNom.setText(atelier.getNom());
+            holder.txtDescription.setText(atelier.getDescription());
 
             holder.ratingBar.setRating(atelier.getEtoile());
-
     }
 
     @Override
@@ -84,19 +66,17 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
 
     class ArtisanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView ImgAtelier;
-        TextView TxtEntrepriseNom, TxtActivite1, TxtActivite2, TxtActivite3;
+        ImageView imgAtelier;
+        TextView txtEntrNom, txtDescription;
         RatingBar ratingBar;
         CardView rowEntreprise;
 
         public ArtisanViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ImgAtelier = itemView.findViewById(R.id.ger_img);
-            TxtEntrepriseNom = itemView.findViewById(R.id.ent_nom);
-            TxtActivite1 = itemView.findViewById(R.id.entr_activ1);
-            TxtActivite2 = itemView.findViewById(R.id.entr_activ2);
-            TxtActivite3 = itemView.findViewById(R.id.entr_activ3);
+            imgAtelier = itemView.findViewById(R.id.ger_img);
+            txtEntrNom = itemView.findViewById(R.id.ent_nom);
+            txtDescription = itemView.findViewById(R.id.atlier_descript);
             rowEntreprise = itemView.findViewById(R.id.row_entreprise);
             ratingBar = itemView.findViewById(R.id.ent_rating);
             rowEntreprise.setOnClickListener(this);
