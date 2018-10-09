@@ -1,6 +1,7 @@
 package com.amstrong.stephane.artisanplus.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +19,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.MapFragment;
 
 import java.util.List;
@@ -44,6 +49,8 @@ public class AtelierActivity extends AppCompatActivity {
     private RecyclerView pictureRecycler;
     private Fragment fragment;
     private Intent intentRechercher;
+    private static final String TAG = "AtelierActivity";
+    private static final int ERROR_DIALOG_REQUEST=9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +64,7 @@ public class AtelierActivity extends AppCompatActivity {
         loadEntreprise(atelier,gerant);
 
         mMapFragment = MapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.map_entreprise, mMapFragment);
         fragmentTransaction.commit();
 
@@ -108,6 +114,7 @@ public class AtelierActivity extends AppCompatActivity {
                 loadPhoto(imgAtelier,200,100);
             }
         });
+
 
     }
 
@@ -163,6 +170,9 @@ public class AtelierActivity extends AppCompatActivity {
         btnSMS2 =findViewById(R.id.btn_ger_sms2);
 
         intentRechercher = new Intent(this,RechercherActivity.class);
+
+        // gMap
+        if (!isServiceOk()) Toast.makeText(this, "la géolocalisation n'est pas valable ", Toast.LENGTH_SHORT).show();;
     }
 
     private void loadEntreprise(Atelier atelier, Gerant gerant){
@@ -210,5 +220,23 @@ public class AtelierActivity extends AppCompatActivity {
 
         imageDialog.create();
         imageDialog.show();
+    }
+
+    public boolean isServiceOk(){
+        Log.d(TAG, "isServiceOk: cheching service version");
+        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(AtelierActivity.this);
+
+        if (available==ConnectionResult.SUCCESS){
+            Log.d(TAG, "isSevicesOK: Google play services are working");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            // an error occured but we can resolve it
+            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(AtelierActivity.this,available,ERROR_DIALOG_REQUEST);
+            dialog.show();
+        } else {
+            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }
