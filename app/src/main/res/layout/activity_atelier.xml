@@ -79,16 +79,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/atlier_img" />
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_favorite_true"
-                    app:layout_constraintBottom_toBottomOf="@+id/atlier_nom"
-                    app:layout_constraintEnd_toEndOf="@+id/atlier_nom" />
-
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
