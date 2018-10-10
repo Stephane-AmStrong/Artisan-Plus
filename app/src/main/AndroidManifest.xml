@@ -52,7 +52,9 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".activity.RechercherActivity" />
-        <activity android:name=".activity.ProfilActivity" />
+        <activity android:name=".activity.ProfilActivity"
+            android:theme="@style/MyTheme"
+            android:parentActivityName=".activity.MainActivity"/>
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps"></activity>

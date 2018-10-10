@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private List<Atelier> lstAtelier;
     private Intent intentEntreprise;
     private Intent intentRechercher;
+    private Intent intentProfil;
 
     private ResultSet resultSet;
 
@@ -111,9 +112,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
-            // Handle the camera action
-        } else if (id == R.id.nav_profil) {
-
+            intentProfil = new Intent(this,ProfilActivity.class);
+            startActivity(intentProfil);
         } else if (id == R.id.nav_favoris) {
 
         } else if (id == R.id.nav_recent) {
