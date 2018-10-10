@@ -8,21 +8,14 @@ public class Gerant implements Parcelable{
     int id;
     private String nom,prenom,sex,tel1,tel2;
 
-    public Gerant(int picture, int id, String nom, String prenom, String sex) {
-        this.picture = picture;
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sex = sex;
-    }
-
-    public Gerant(int picture, int id, String nom, String prenom, String tel1, String tel2) {
+    public Gerant(int picture, int id, String nom, String prenom, String tel1, String tel2, String sex) {
         this.picture = picture;
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.tel1 = tel1;
         this.tel2 = tel2;
+        this.sex = sex;
     }
 
     protected Gerant(Parcel in) {

@@ -35,9 +35,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView categorieRecyclerView;
     private List<Categorie> lstCategorie;
     private List<Atelier> lstAtelier;
-    private Intent intentEntreprise;
-    private Intent intentRechercher;
-    private Intent intentProfil;
+    private Intent intent;
 
     private ResultSet resultSet;
 
@@ -98,7 +96,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_search) {
-            startActivity(intentRechercher);
+            intent = new Intent(this,RechercherActivity.class);
+            startActivity(intent);
         }
 
 
@@ -112,8 +111,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
-            intentProfil = new Intent(this,ProfilActivity.class);
-            startActivity(intentProfil);
+            intent = new Intent(this,ProfilActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_favoris) {
 
         } else if (id == R.id.nav_recent) {
@@ -138,8 +137,8 @@ public class MainActivity extends AppCompatActivity
         categorieRecyclerView = findViewById(R.id.lst_profession);
         artisanRecyclerView = findViewById(R.id.lst_atelier);
 
-        intentEntreprise = new Intent(this,AtelierActivity.class);
-        intentRechercher = new Intent(this,RechercherActivity.class);
+
+
     }
 
     private void load(){
@@ -172,9 +171,10 @@ public class MainActivity extends AppCompatActivity
 
     public void callEntrepriseActivity(int position ){
         atelier = lstAtelier.get(position);
-        intentEntreprise.putExtra(keyEntreprise, atelier);
-        intentRechercher.putExtra(keyEntreprise, atelier);
-        startActivity(intentEntreprise);
+        intent = new Intent(this,AtelierActivity.class);
+        intent.putExtra(keyEntreprise, atelier);
+        intent.putExtra(keyEntreprise, atelier);
+        startActivity(intent);
     }
 
     public void addAteliers(int categoriePosition){
