@@ -170,9 +170,6 @@ public class AtelierActivity extends AppCompatActivity {
         btnSMS2 =findViewById(R.id.btn_ger_sms2);
 
         intentRechercher = new Intent(this,RechercherActivity.class);
-
-        // gMap
-        if (!isServiceOk()) Toast.makeText(this, "la géolocalisation n'est pas valable ", Toast.LENGTH_SHORT).show();;
     }
 
     private void loadEntreprise(Atelier atelier, Gerant gerant){
@@ -222,21 +219,5 @@ public class AtelierActivity extends AppCompatActivity {
         imageDialog.show();
     }
 
-    public boolean isServiceOk(){
-        Log.d(TAG, "isServiceOk: cheching service version");
-        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(AtelierActivity.this);
 
-        if (available==ConnectionResult.SUCCESS){
-            Log.d(TAG, "isSevicesOK: Google play services are working");
-            return true;
-        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // an error occured but we can resolve it
-            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(AtelierActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-        } else {
-            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
-        }
-        return false;
-    }
 }
