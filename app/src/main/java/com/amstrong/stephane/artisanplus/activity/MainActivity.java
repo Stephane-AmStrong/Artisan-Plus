@@ -22,6 +22,7 @@ import com.amstrong.stephane.artisanplus.adapter.ButtonAdapter;
 import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Categorie;
+import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
 import java.util.List;
 
@@ -41,8 +42,10 @@ public class MainActivity extends AppCompatActivity
 
     public static final String keyEntreprise ="entreprise_key";
     public static final String keyRechercher="rechercher_key";
+    public static final String keyUtilisater="utilisateur_key";
     private Atelier atelier;
     private Categorie categorie;
+    private Utilisateur utilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,9 @@ public class MainActivity extends AppCompatActivity
         initialisation();
         load();
         //
-        fetchColor(this);
+
+        //connection
+        connected();
     }
 
     @Override
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profil) {
             intent = new Intent(this,ProfilActivity.class);
+            intent.putExtra(keyUtilisater,utilisateur);
             startActivity(intent);
         } else if (id == R.id.nav_favoris) {
 
@@ -136,9 +142,10 @@ public class MainActivity extends AppCompatActivity
         // RecyclerViewer
         categorieRecyclerView = findViewById(R.id.lst_profession);
         artisanRecyclerView = findViewById(R.id.lst_atelier);
+    }
 
-
-
+    private void connected(){
+        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","98765445","Masculin");
     }
 
     private void load(){
@@ -154,6 +161,7 @@ public class MainActivity extends AppCompatActivity
         categorieRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
     }
+    /*
 
     private void fetchColor(final Context context) {
         TypedValue typedValue = new TypedValue();
@@ -168,6 +176,8 @@ public class MainActivity extends AppCompatActivity
         //return color;
 
     }
+
+    */
 
     public void callEntrepriseActivity(int position ){
         atelier = lstAtelier.get(position);
