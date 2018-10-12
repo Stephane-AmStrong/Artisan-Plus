@@ -1,20 +1,28 @@
 package com.amstrong.stephane.artisanplus.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.AtelierAdapter;
@@ -46,6 +54,9 @@ public class MainActivity extends AppCompatActivity
     private Atelier atelier;
     private Categorie categorie;
     private Utilisateur utilisateur;
+    private Dialog myDialog;
+    private LinearLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,15 +127,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
+            // profil
             intent = new Intent(this,ProfilActivity.class);
             intent.putExtra(keyUtilisater,utilisateur);
             startActivity(intent);
+
         } else if (id == R.id.nav_favoris) {
 
         } else if (id == R.id.nav_recent) {
 
         } else if (id == R.id.nav_business) {
-
+            //business
+            showCustomDialog(); correction du bug
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -142,6 +156,9 @@ public class MainActivity extends AppCompatActivity
         // RecyclerViewer
         categorieRecyclerView = findViewById(R.id.lst_profession);
         artisanRecyclerView = findViewById(R.id.lst_atelier);
+
+        // custom dialog initialisation
+
     }
 
     private void connected(){
@@ -161,23 +178,7 @@ public class MainActivity extends AppCompatActivity
         categorieRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
     }
-    /*
 
-    private void fetchColor(final Context context) {
-        TypedValue typedValue = new TypedValue();
-
-        TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimary,R.attr.colorPrimaryDark,R.attr.colorAccent });
-        colorPrimary = a.getColor(0, 0);
-        colorPrimaryDark = a.getColor(1, 0);
-        colorAccent = a.getColor(2, 0);
-
-        a.recycle();
-
-        //return color;
-
-    }
-
-    */
 
     public void callEntrepriseActivity(int position ){
         atelier = lstAtelier.get(position);
@@ -200,6 +201,76 @@ public class MainActivity extends AppCompatActivity
     private void load(List<Atelier> ateliers){
         atelierAdapter = new AtelierAdapter(this, ateliers);
         artisanRecyclerView.setAdapter(atelierAdapter);
+    }
+
+    public void showCustomDialog( View view){
+        TextView txtMessage,btnClose;
+        Button btnSubmit,btnCancel;
+        myDialog.setContentView(R.layout.dialog_message);
+        txtMessage = findViewById(R.id.diag_message);
+        btnClose = findViewById(R.id.diag_btnCancel);
+        btnSubmit = findViewById(R.id.diag_btnOk);
+        btnCancel = findViewById(R.id.diag_btnCancel);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void showCustomDialog(){
+        TextView txtMessage,btnClose;
+        Button btnSubmit,btnCancel;
+        myDialog.setContentView(R.layout.dialog_message);
+        txtMessage = findViewById(R.id.diag_message);
+        btnClose = findViewById(R.id.diag_btnCancel);
+        btnSubmit = findViewById(R.id.diag_btnOk);
+        btnCancel = findViewById(R.id.diag_btnCancel);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 
 }
