@@ -28,14 +28,17 @@ import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Gerant;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
 public class AtelierActivity extends AppCompatActivity {
 
     private MapFragment mMapFragment ;
-    private Intent intent;
+    private Intent intent,mapIntent;
     private Atelier atelier;
     private Gerant gerant;
     private List<Integer> lstPicture;
@@ -65,11 +68,11 @@ public class AtelierActivity extends AppCompatActivity {
 
         loadEntreprise(atelier,gerant);
 
+        // Map setting
         mMapFragment = MapFragment.newInstance();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.map_entreprise, mMapFragment);
         fragmentTransaction.commit();
-
 
         btnTel1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +130,19 @@ public class AtelierActivity extends AppCompatActivity {
             }
         });
 
+        mMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
 
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+
+                        startActivity(mapIntent);
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -162,6 +177,8 @@ public class AtelierActivity extends AppCompatActivity {
 
     private void initialisation(){
         intent = getIntent();
+        mapIntent = new  Intent(this,MapsActivity.class);
+
         atelier =intent.getParcelableExtra(entrepriseKey);
         lstPicture= atelier.getLstPictures();
         gerant= atelier.getGerant();

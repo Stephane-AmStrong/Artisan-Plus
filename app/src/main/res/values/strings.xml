@@ -9,4 +9,9 @@
     <string name="action_plus">plus</string>
     <string name="action_search">Rechercher</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="malfemelle">
+        <item>Masculin</item>
+        <item>Feminin</item>
+    </string-array>
 </resources>
