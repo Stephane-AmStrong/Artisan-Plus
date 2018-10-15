@@ -50,12 +50,12 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity android:name=".activity.RechercherActivity" />
+<<<<<<< HEAD
 <<<<<<< HEAD
         <activity
             android:name=".activity.MapsActivity"
@@ -73,6 +73,16 @@
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+>>>>>>> beta
+=======
+        <activity
+            android:name=".activity.ProfilActivity"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".activity.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".activity.EditProfilActivity" />
 >>>>>>> beta
     </application>
 

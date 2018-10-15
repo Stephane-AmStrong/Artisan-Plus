@@ -145,16 +145,6 @@ public class MainActivity extends AppCompatActivity
             //business
             //showCustomDialog();
 
-        } else if (id == R.id.nav_testMap) {
-            if (isSevicesOK()){
-                Log.d(TAG, "onNavigationItemSelected: Service is ok");
-
-                intent = new Intent(this,MapsActivity.class);
-                startActivity(intent);
-            }
-
-
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
