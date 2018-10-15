@@ -63,6 +63,7 @@
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activity.EditProfilActivity" />
+        <activity android:name=".activity.EditAtelierActivity"></activity>
     </application>
 
 </manifest>

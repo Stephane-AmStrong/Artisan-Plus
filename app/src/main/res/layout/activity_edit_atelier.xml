@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.EditProfilActivity">
+    tools:context=".activity.EditAtelierActivity">
 
     <android.support.v7.widget.CardView
         android:id="@+id/block_picture"
@@ -19,15 +18,15 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/edit_photo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:id="@+id/edit_photoAtelier"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/profil_1"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/bckgrnd_5"
+                app:layout_constraintBottom_toTopOf="@+id/edit_desription"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,27 +39,11 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:ems="10"
+                android:hint="Nommez l'atelier"
                 android:text=""
-                android:hint="Nom"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/edit_photo"
-                app:layout_constraintTop_toTopOf="@+id/edit_photo" />
-
-
-            <EditText
-                android:id="@+id/edit_pren"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Prénoms"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/edit_photo"
-                app:layout_constraintTop_toBottomOf="@+id/edit_nom" />
+                app:layout_constraintStart_toEndOf="@+id/edit_photoAtelier"
+                app:layout_constraintTop_toTopOf="@+id/edit_photoAtelier" />
 
             <Spinner
                 android:id="@+id/edit_sex"
@@ -68,21 +51,39 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:entries="@array/malfemelle"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_photo"
-                app:layout_constraintEnd_toEndOf="@+id/edit_pren"
-                app:layout_constraintStart_toEndOf="@+id/edit_photo"
-                app:layout_constraintTop_toBottomOf="@+id/edit_pren" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:entries="@array/lstcategorie"
+                app:layout_constraintBottom_toTopOf="@+id/edit_desription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edit_photoAtelier"
+                app:layout_constraintTop_toBottomOf="@+id/edit_nom" />
+
+            <EditText
+                android:id="@+id/edit_desription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="Decrivez l'atelier"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/edit_btn_updatePicture"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/ic_menu_camera"
                 android:backgroundTint="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/edit_photo" />
+                app:layout_constraintBottom_toBottomOf="@+id/edit_photoAtelier"
+                app:layout_constraintEnd_toEndOf="@+id/edit_photoAtelier" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
@@ -103,7 +104,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Téléphone"
+                android:text="Album"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,70 +144,11 @@
                 app:layout_constraintEnd_toEndOf="@+id/edit_tel_recycler"
                 app:layout_constraintTop_toBottomOf="@+id/separator_1"
                 android:backgroundTint="@color/colorAccent"/>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/block_atelier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/block_contact">
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/label_atelier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Téléphone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <view
-                android:id="@+id/separator_2"
-                android:layout_width="0dp"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/label_atelier"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/label_atelier"
-                app:layout_constraintTop_toTopOf="@+id/label_atelier" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/edit_atelier_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_atelier"/>
 
             <Button
-                android:id="@+id/edit_btn_addAtelier"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/ic_add_button"
-                app:layout_constraintEnd_toEndOf="@+id/edit_atelier_recycler"
-                app:layout_constraintTop_toBottomOf="@+id/separator_2"
-                android:backgroundTint="@color/colorAccent"/>
-
-            <Button
-                android:id="@+id/edit_btn_enregistrerProfil"
+                android:id="@+id/edit_btn_enregistrerAtelier"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Enregister"
                 android:textColor="#FFF"
                 android:background="@color/colorPrimary"
@@ -217,10 +159,9 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_tel_recycler" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
-
-
 
 </android.support.constraint.ConstraintLayout>
