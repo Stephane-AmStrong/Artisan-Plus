@@ -7,14 +7,14 @@ public class Vote implements Parcelable {
     private int id;
     private int note;
     private String comment;
-    private User user;
+    private Utilisateur utilisateur;
     private Atelier atelier;
 
-    public Vote(int id, int note, String comment, User user, Atelier atelier) {
+    public Vote(int id, int note, String comment, Utilisateur utilisateur, Atelier atelier) {
         this.id = id;
         this.note = note;
         this.comment = comment;
-        this.user = user;
+        this.utilisateur = utilisateur;
         this.atelier = atelier;
     }
 
@@ -61,12 +61,12 @@ public class Vote implements Parcelable {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return user;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     public Atelier getAtelier() {

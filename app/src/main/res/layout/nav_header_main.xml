@@ -14,6 +14,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/use_picture1"
+        android:layout_gravity="center_horizontal"
         android:layout_width="144dp"
         android:layout_height="144dp"
         android:src="@drawable/profil_0"
@@ -24,7 +25,8 @@
         android:id="@+id/use_nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle"
+        android:text="Polin"
+        android:layout_gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

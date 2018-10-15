@@ -48,18 +48,23 @@ public class ResultSet {
     private int[] ids = {1,2,3,4,5,6,7,8,9,10};
     private String[] nomAtelier ={"BIO & Fils","TALO Mahouton","KOSSOU Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
     private String[] nomGerant ={"BIO","TALO","Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
-    private String[] prenomGerant ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","Grace","Oscar"};
+    private String[] prenomGerant ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","George","Oscar"};
+    private String [] sexGerant = {"Féminin","Féminin","Masculin","Féminin","Masculin","Féminin","Féminin","Masculin","Masculin","Masculin"};
     private String[] nomCategories ={"Salon de beauté","Construction & BTP","Salon de beauté","Patisserie","Commerce Général"};
 <<<<<<< HEAD
     private String[][] lesProfession ={{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"},{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"}};
     //private String[][] lesDescriptions ={{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"},{"Salon de coiffure,Décoration intérieur et Commerce de pagne"},{"Construction,Menuserie et Charpenterie"},{"Couture,Stylisme et recyclage"},{"Boulangerie,Vente de pain et fabrique de gateau"},{"Super Marché,vente de divers et vente de cosmétique"}};
 =======
     private String[] lesDescription ={"Salon de coiffure,Décoration intérieur et Commerce de pagne","Construction,Menuserie et Charpenterie","Couture,Stylisme et recyclage","Boulangerie,Vente de pain et fabrique de gateau","Super Marché,vente de divers et vente de cosmétique","Salon de coiffure,Décoration intérieur et Commerce de pagne","Construction,Menuserie et Charpenterie","Couture,Stylisme et recyclage","Boulangerie,Vente de pain et fabrique de gateau","Super Marché,vente de divers et vente de cosmétique"};
+<<<<<<< HEAD
+>>>>>>> beta
+=======
+
 >>>>>>> beta
     public List<Gerant> getGerant(){
         lstGeran = new ArrayList<>();
         for (int i =0;i<imgGerant.length;i++){
-            lstGeran.add(new Gerant(imgGerant[i],ids[i], nomGerant[i],prenomGerant[i],"97 54 43 32","95 55 66 87"));
+            lstGeran.add(new Gerant(imgGerant[i],ids[i], nomGerant[i],prenomGerant[i],"97 54 43 32","95 55 66 87",sexGerant[i]));
         }
         return lstGeran;
     }

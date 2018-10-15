@@ -1,20 +1,30 @@
 package com.amstrong.stephane.artisanplus.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.AtelierAdapter;
@@ -22,6 +32,9 @@ import com.amstrong.stephane.artisanplus.adapter.ButtonAdapter;
 import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Categorie;
+import com.amstrong.stephane.artisanplus.model.Utilisateur;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.List;
 
@@ -35,15 +48,20 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView categorieRecyclerView;
     private List<Categorie> lstCategorie;
     private List<Atelier> lstAtelier;
-    private Intent intentEntreprise;
-    private Intent intentRechercher;
+    private Intent intent;
 
     private ResultSet resultSet;
-
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DIALOG_REQUEST=9001;
     public static final String keyEntreprise ="entreprise_key";
     public static final String keyRechercher="rechercher_key";
+    public static final String keyUtilisater="utilisateur_key";
     private Atelier atelier;
     private Categorie categorie;
+    private Utilisateur utilisateur;
+    private Dialog myDialog;
+    private LinearLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +82,9 @@ public class MainActivity extends AppCompatActivity
         initialisation();
         load();
         //
-        fetchColor(this);
+
+        //connection
+        connected();
     }
 
     @Override
@@ -97,7 +117,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_search) {
-            startActivity(intentRechercher);
+            intent = new Intent(this,RechercherActivity.class);
+            startActivity(intent);
         }
 
 
@@ -111,14 +132,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
-            // Handle the camera action
-        } else if (id == R.id.nav_profil) {
+            // profil
+            intent = new Intent(this,ProfilActivity.class);
+            intent.putExtra(keyUtilisater,utilisateur);
+            startActivity(intent);
 
         } else if (id == R.id.nav_favoris) {
 
         } else if (id == R.id.nav_recent) {
 
         } else if (id == R.id.nav_business) {
+            //business
+            //showCustomDialog();
+
+        } else if (id == R.id.nav_testMap) {
+            if (isSevicesOK()){
+                Log.d(TAG, "onNavigationItemSelected: Service is ok");
+
+                intent = new Intent(this,MapsActivity.class);
+                startActivity(intent);
+            }
+
+
 
         }
 
@@ -138,8 +173,12 @@ public class MainActivity extends AppCompatActivity
         categorieRecyclerView = findViewById(R.id.lst_profession);
         artisanRecyclerView = findViewById(R.id.lst_atelier);
 
-        intentEntreprise = new Intent(this,AtelierActivity.class);
-        intentRechercher = new Intent(this,RechercherActivity.class);
+        // custom dialog initialisation
+
+    }
+
+    private void connected(){
+        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","98765445","Masculin");
     }
 
     private void load(){
@@ -156,25 +195,13 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void fetchColor(final Context context) {
-        TypedValue typedValue = new TypedValue();
-
-        TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimary,R.attr.colorPrimaryDark,R.attr.colorAccent });
-        colorPrimary = a.getColor(0, 0);
-        colorPrimaryDark = a.getColor(1, 0);
-        colorAccent = a.getColor(2, 0);
-
-        a.recycle();
-
-        //return color;
-
-    }
 
     public void callEntrepriseActivity(int position ){
         atelier = lstAtelier.get(position);
-        intentEntreprise.putExtra(keyEntreprise, atelier);
-        intentRechercher.putExtra(keyEntreprise, atelier);
-        startActivity(intentEntreprise);
+        intent = new Intent(this,AtelierActivity.class);
+        intent.putExtra(keyEntreprise, atelier);
+        intent.putExtra(keyEntreprise, atelier);
+        startActivity(intent);
     }
 
     public void addAteliers(int categoriePosition){
@@ -190,6 +217,95 @@ public class MainActivity extends AppCompatActivity
     private void load(List<Atelier> ateliers){
         atelierAdapter = new AtelierAdapter(this, ateliers);
         artisanRecyclerView.setAdapter(atelierAdapter);
+    }
+
+    public void showCustomDialog( View view){
+        TextView txtMessage,btnClose;
+        Button btnSubmit,btnCancel;
+        myDialog.setContentView(R.layout.dialog_message);
+        txtMessage = findViewById(R.id.diag_message);
+        btnClose = findViewById(R.id.diag_btnCancel);
+        btnSubmit = findViewById(R.id.diag_btnOk);
+        btnCancel = findViewById(R.id.diag_btnCancel);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void showCustomDialog(){
+        TextView txtMessage,btnClose;
+        Button btnSubmit,btnCancel;
+        myDialog.setContentView(R.layout.dialog_message);
+        txtMessage = findViewById(R.id.diag_message);
+        btnClose = findViewById(R.id.diag_btnCancel);
+        btnSubmit = findViewById(R.id.diag_btnOk);
+        btnCancel = findViewById(R.id.diag_btnCancel);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public boolean isSevicesOK(){
+        Log.d(TAG, "isSevicesOK: checking google services version");
+        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        if (available==ConnectionResult.SUCCESS){
+            //everything and the user can make map requests
+            Log.d(TAG, "isSevicesOK: Google play services are working");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            // an error occured but we can resolve it
+            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else {
+            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
 }

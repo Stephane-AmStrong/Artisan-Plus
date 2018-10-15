@@ -45,18 +45,18 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
 
     @Override
     public void onBindViewHolder(@NonNull ArtisanViewHolder holder, int position) {
-            atelier = lstAtelier.get(position);
+        atelier = lstAtelier.get(position);
 
-            Picasso.get()
-                    .load(atelier.getImage())
-                    .resize(120,120)
-                    .centerCrop()
-                    .into(holder.imgAtelier);
+        Picasso.get()
+                .load(atelier.getImage())
+                .resize(120,120)
+                .centerCrop()
+                .into(holder.imgAtelier);
 
-            holder.txtEntrNom.setText(atelier.getNom());
-            holder.txtDescription.setText(atelier.getDescription());
-
-            holder.ratingBar.setRating(atelier.getEtoile());
+        holder.txtEntrNom.setText(atelier.getNom());
+        holder.txtEntrCateg.setText(atelier.getCategorie().getLibelle());
+        holder.txtDescription.setText(atelier.getDescription());
+        holder.ratingBar.setRating(atelier.getEtoile());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
     class ArtisanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView imgAtelier;
-        TextView txtEntrNom, txtDescription;
+        TextView txtEntrNom,txtEntrCateg, txtDescription;
         RatingBar ratingBar;
         CardView rowEntreprise;
 
@@ -76,6 +76,7 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
 
             imgAtelier = itemView.findViewById(R.id.ger_img);
             txtEntrNom = itemView.findViewById(R.id.ent_nom);
+            txtEntrCateg = itemView.findViewById(R.id.atlier_categorie);
             txtDescription = itemView.findViewById(R.id.atlier_descript);
             rowEntreprise = itemView.findViewById(R.id.row_entreprise);
             ratingBar = itemView.findViewById(R.id.ent_rating);

@@ -3,40 +3,38 @@ package com.amstrong.stephane.artisanplus.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Gerant implements Parcelable{
-    int picture;
-    int id;
-    private String nom,prenom,sex,tel1,tel2;
+public class Utilisateur implements Parcelable {
+    private int picture;
+    private int id;
+    private String nom, prenom,tel,sex;
 
-    public Gerant(int picture, int id, String nom, String prenom, String tel1, String tel2, String sex) {
+    public Utilisateur(int picture, int id, String nom, String prenom, String tel, String sex) {
         this.picture = picture;
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.tel1 = tel1;
-        this.tel2 = tel2;
+        this.tel = tel;
         this.sex = sex;
     }
 
-    protected Gerant(Parcel in) {
+    protected Utilisateur(Parcel in) {
         picture = in.readInt();
         id = in.readInt();
         nom = in.readString();
         prenom = in.readString();
+        tel = in.readString();
         sex = in.readString();
-        tel1 = in.readString();
-        tel2 = in.readString();
     }
 
-    public static final Creator<Gerant> CREATOR = new Creator<Gerant>() {
+    public static final Creator<Utilisateur> CREATOR = new Creator<Utilisateur>() {
         @Override
-        public Gerant createFromParcel(Parcel in) {
-            return new Gerant(in);
+        public Utilisateur createFromParcel(Parcel in) {
+            return new Utilisateur(in);
         }
 
         @Override
-        public Gerant[] newArray(int size) {
-            return new Gerant[size];
+        public Utilisateur[] newArray(int size) {
+            return new Utilisateur[size];
         }
     };
 
@@ -72,28 +70,20 @@ public class Gerant implements Parcelable{
         this.prenom = prenom;
     }
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getTel1() {
-        return tel1;
-    }
-
-    public void setTel1(String tel1) {
-        this.tel1 = tel1;
-    }
-
-    public String getTel2() {
-        return tel2;
-    }
-
-    public void setTel2(String tel2) {
-        this.tel2 = tel2;
     }
 
     @Override
@@ -107,8 +97,7 @@ public class Gerant implements Parcelable{
         parcel.writeInt(id);
         parcel.writeString(nom);
         parcel.writeString(prenom);
+        parcel.writeString(tel);
         parcel.writeString(sex);
-        parcel.writeString(tel1);
-        parcel.writeString(tel2);
     }
 }

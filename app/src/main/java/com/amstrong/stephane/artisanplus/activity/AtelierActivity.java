@@ -1,14 +1,17 @@
 package com.amstrong.stephane.artisanplus.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +20,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.MapFragment;
 
 import java.util.List;
@@ -35,6 +41,7 @@ public class AtelierActivity extends AppCompatActivity {
     private List<Integer> lstPicture;
     private ImageView btnTel1,btnTel2,btnSMS1,btnSMS2;
     private TextView txtPicture;
+    private CardView gerantRow;
 
     private String entrepriseKey = MainActivity.keyEntreprise;
     private RatingBar atlierRating;
@@ -42,8 +49,10 @@ public class AtelierActivity extends AppCompatActivity {
     private TextView txtNomEntr,txtNomPrenom,txtTel1,txtTel2, txtDescriptEntr;
     private PictureAdapter pictureAdapter;
     private RecyclerView pictureRecycler;
-    private Fragment fragment;
-    private Intent intentRechercher;
+    private static final String TAG = "AtelierActivity";
+    private static final int ERROR_DIALOG_REQUEST=9001;
+
+    public static final String keyProfil ="profil_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +66,7 @@ public class AtelierActivity extends AppCompatActivity {
         loadEntreprise(atelier,gerant);
 
         mMapFragment = MapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.map_entreprise, mMapFragment);
         fragmentTransaction.commit();
 
@@ -109,6 +117,17 @@ public class AtelierActivity extends AppCompatActivity {
             }
         });
 
+        //gerant
+        gerantRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(AtelierActivity.this,ProfilActivity.class);
+                intent.putExtra(keyProfil,gerant);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -132,7 +151,8 @@ public class AtelierActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_search) {
-            startActivity(intentRechercher);
+            intent = new Intent(this,RechercherActivity.class);
+            startActivity(intent);
         }
 
 
@@ -162,7 +182,7 @@ public class AtelierActivity extends AppCompatActivity {
         btnSMS1 =findViewById(R.id.btn_ger_sms1);
         btnSMS2 =findViewById(R.id.btn_ger_sms2);
 
-        intentRechercher = new Intent(this,RechercherActivity.class);
+        gerantRow = findViewById(R.id.block_gerant);
     }
 
     private void loadEntreprise(Atelier atelier, Gerant gerant){
@@ -211,4 +231,6 @@ public class AtelierActivity extends AppCompatActivity {
         imageDialog.create();
         imageDialog.show();
     }
+
+
 }
