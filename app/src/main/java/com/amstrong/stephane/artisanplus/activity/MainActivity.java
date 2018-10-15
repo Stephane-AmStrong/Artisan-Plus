@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.AtelierAdapter;
@@ -31,6 +33,8 @@ import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Categorie;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.List;
 
@@ -47,7 +51,8 @@ public class MainActivity extends AppCompatActivity
     private Intent intent;
 
     private ResultSet resultSet;
-
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DIALOG_REQUEST=9001;
     public static final String keyEntreprise ="entreprise_key";
     public static final String keyRechercher="rechercher_key";
     public static final String keyUtilisater="utilisateur_key";
@@ -138,7 +143,18 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_business) {
             //business
-            showCustomDialog(); correction du bug
+            //showCustomDialog();
+
+        } else if (id == R.id.nav_testMap) {
+            if (isSevicesOK()){
+                Log.d(TAG, "onNavigationItemSelected: Service is ok");
+
+                intent = new Intent(this,MapsActivity.class);
+                startActivity(intent);
+            }
+
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -271,6 +287,25 @@ public class MainActivity extends AppCompatActivity
         txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    public boolean isSevicesOK(){
+        Log.d(TAG, "isSevicesOK: checking google services version");
+        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        if (available==ConnectionResult.SUCCESS){
+            //everything and the user can make map requests
+            Log.d(TAG, "isSevicesOK: Google play services are working");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            // an error occured but we can resolve it
+            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else {
+            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
 }
