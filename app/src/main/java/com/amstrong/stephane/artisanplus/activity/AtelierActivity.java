@@ -223,8 +223,12 @@ public class AtelierActivity extends AppCompatActivity {
             txtPicture .setText("Images ("+lstPicture.size()+")");
         }
         txtNomPrenom.setText(gerant.getNom()+" "+gerant.getPrenom());
-        txtTel1.setText(gerant.getTel1());
-        txtTel2 .setText(gerant.getTel2());
+        txtTel1.setText(gerant.getLstContact().get(0));
+        if (gerant.getLstContact().get(1).trim().isEmpty()){
+            txtTel2.setVisibility(View.GONE);
+        }
+        txtTel2 .setText(gerant.getLstContact().get(1));
+
 
         //
         pictureAdapter = new PictureAdapter(this, lstPicture);

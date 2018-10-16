@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void connected(){
-        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","98765445","Masculin");
+        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","Masculin","98 76 54 45");
     }
 
     private void load(){
@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity
 
         artisanRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categorieRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
     }
 
 
@@ -244,58 +243,5 @@ public class MainActivity extends AppCompatActivity
         myDialog.show();
     }
 
-    public void showCustomDialog(){
-        TextView txtMessage,btnClose;
-        Button btnSubmit,btnCancel;
-        myDialog.setContentView(R.layout.dialog_message);
-        txtMessage = findViewById(R.id.diag_message);
-        btnClose = findViewById(R.id.diag_btnCancel);
-        btnSubmit = findViewById(R.id.diag_btnOk);
-        btnCancel = findViewById(R.id.diag_btnCancel);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
-    public boolean isSevicesOK(){
-        Log.d(TAG, "isSevicesOK: checking google services version");
-        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
-
-        if (available==ConnectionResult.SUCCESS){
-            //everything and the user can make map requests
-            Log.d(TAG, "isSevicesOK: Google play services are working");
-            return true;
-        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // an error occured but we can resolve it
-            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-        }else {
-            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
-        }
-        return false;
-    }
 
 }
