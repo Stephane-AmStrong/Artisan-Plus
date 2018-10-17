@@ -32,7 +32,7 @@ public class TelephoneAdapter extends RecyclerView.Adapter<TelephoneAdapter.Tele
     @NonNull
     @Override
     public TelephoneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = layoutInflater.inflate(R.layout.row_telephone,parent,false);
+        view = layoutInflater.inflate(R.layout.row_phone_read,parent,false);
         TelephoneViewHolder telephoneViewHolder = new TelephoneViewHolder(view);
         return telephoneViewHolder;
     }

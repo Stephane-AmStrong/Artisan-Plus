@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.amstrong.stephane.artisanplus.R;
 
-public class EditProfilActivity extends AppCompatActivity {
+public class AtelierEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profil);
+        setContentView(R.layout.activity_edit_atelier);
     }
 }

@@ -58,8 +58,8 @@
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".activity.EditProfilActivity" />
-        <activity android:name=".activity.EditAtelierActivity" />
+        <activity android:name=".activity.ProfiEditlActivity" />
+        <activity android:name=".activity.AtelierEditActivity" />
         <activity
             android:name=".activity.ProfilActivity"
             android:label="@string/title_activity_profil"

@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_favoris) {
-            intent = new Intent(this,EditAtelierActivity.class);
+            intent = new Intent(this,AtelierEditActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_recent) {

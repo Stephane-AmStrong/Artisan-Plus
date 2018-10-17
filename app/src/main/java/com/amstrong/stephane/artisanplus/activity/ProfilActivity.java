@@ -3,9 +3,7 @@ package com.amstrong.stephane.artisanplus.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +51,7 @@ public class ProfilActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(ProfilActivity.this,EditProfilActivity.class);
+                intent = new Intent(ProfilActivity.this,ProfiEditlActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,7 +98,7 @@ public class ProfilActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_edit) {
-            intent = new Intent(ProfilActivity.this,EditProfilActivity.class);
+            intent = new Intent(ProfilActivity.this,ProfiEditlActivity.class);
             startActivity(intent);
         }
 
