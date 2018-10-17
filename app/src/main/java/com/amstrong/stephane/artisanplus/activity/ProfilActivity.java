@@ -29,7 +29,6 @@ public class ProfilActivity extends AppCompatActivity {
     private Intent intent;
     private Gerant gerant;
     private Utilisateur utilisateur;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
     private String atelierKey = AtelierActivity.keyProfil;
     private String userKey = MainActivity.keyUtilisater;
     private ImageView imgProfil;
@@ -38,6 +37,8 @@ public class ProfilActivity extends AppCompatActivity {
     private TelephoneAdapter telephoneAdapter;
     private List<String> lstTelephone;
     private Menu menu;
+    private AppBarLayout mAppBarLayout;
+    private Toolbar toolbar;
 
     private static final String TAG = "ProfilActivity";
 
@@ -45,18 +46,19 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                intent = new Intent(ProfilActivity.this,EditProfilActivity.class);
+                startActivity(intent);
             }
         });
 
-        AppBarLayout mAppBarLayout = findViewById(R.id.app_bar);
+        mAppBarLayout = findViewById(R.id.app_bar);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = false;
             int scrollRange = -1;
@@ -98,7 +100,8 @@ public class ProfilActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_edit) {
-            return true;
+            intent = new Intent(ProfilActivity.this,EditProfilActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -119,7 +122,6 @@ public class ProfilActivity extends AppCompatActivity {
         //
         intent = getIntent();
 
-        collapsingToolbarLayout = findViewById(R.id.collapsingToolBar);
         imgProfil = findViewById(R.id.profil_img);
         txtSex = findViewById(R.id.profil_sex);
         contactRecyclerView = findViewById(R.id.profil_contactRecyclerView);
@@ -144,7 +146,8 @@ public class ProfilActivity extends AppCompatActivity {
 
     private void load(Gerant gerant){
         imgProfil.setImageResource(gerant.getPicture());
-        collapsingToolbarLayout.setTitle(gerant.getNom()+" "+gerant.getPrenom());
+
+        setTitle(gerant.getNom()+" "+gerant.getPrenom());
         txtSex.setText(gerant.getSex());
 
         telephoneAdapter = new TelephoneAdapter(this,gerant.getLstContact());
@@ -154,7 +157,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     private void load(Utilisateur utilisateur){
         imgProfil.setImageResource(utilisateur.getPicture());
-        collapsingToolbarLayout.setTitle(utilisateur.getNom()+" "+ utilisateur.getPrenom());
+        setTitle(utilisateur.getNom()+" "+ utilisateur.getPrenom());
         txtSex.setText(utilisateur.getSex());
 
         telephoneAdapter = new TelephoneAdapter(this,utilisateur.getLstContact());

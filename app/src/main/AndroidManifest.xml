@@ -56,10 +56,6 @@
 
         <activity android:name=".activity.RechercherActivity" />
         <activity
-            android:name=".activity.Profil2Activity"
-            android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/MyTheme" />
-        <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activity.EditProfilActivity" />
@@ -67,7 +63,8 @@
         <activity
             android:name=".activity.ProfilActivity"
             android:label="@string/title_activity_profil"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.activity.Profil2Activity;
 import com.amstrong.stephane.artisanplus.activity.ProfilActivity;
 
 import java.util.List;
