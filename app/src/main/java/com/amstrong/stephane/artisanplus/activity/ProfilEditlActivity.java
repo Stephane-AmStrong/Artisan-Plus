@@ -36,7 +36,7 @@ public class ProfilEditlActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfilEditlActivity";
     private String userEditKey = ProfilReadActivity.keyUserEdit;
-    private String artisanEditKey = ProfilReadActivity.keyArtisanEdit;
+    private String artisanEditKey = ProfilReadActivity.keyEntrepreneurEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +63,14 @@ public class ProfilEditlActivity extends AppCompatActivity {
 
     private void load(){
         try {
-            if (intent.getExtras().keySet().contains(artisanEditKey)){
-                entrepreneur = intent.getParcelableExtra(artisanEditKey);
-                load(entrepreneur); return;
-            }
-
             if (intent.getExtras().keySet().contains(userEditKey)){
                 utilisateur = intent.getParcelableExtra(userEditKey);
                 load(utilisateur);return;
+            }
+
+            if (intent.getExtras().keySet().contains(artisanEditKey)){
+                entrepreneur = intent.getParcelableExtra(artisanEditKey);
+                load(entrepreneur); return;
             }
         } catch (Exception e){
             Log.e(TAG, "load: erreur",e );

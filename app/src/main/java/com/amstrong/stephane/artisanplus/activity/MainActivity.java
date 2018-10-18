@@ -130,8 +130,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_favoris) {
-            intent = new Intent(this,EntrepriseEditActivity.class);
-            startActivity(intent);
+            //
 
         } else if (id == R.id.nav_recent) {
 
@@ -182,7 +181,6 @@ public class MainActivity extends AppCompatActivity
     public void callEntrepriseActivity(int position ){
         entreprise = lstEntreprise.get(position);
         intent = new Intent(this,EntrepriseActivity.class);
-        intent.putExtra(keyEntreprise, entreprise);
         intent.putExtra(keyEntreprise, entreprise);
         startActivity(intent);
     }

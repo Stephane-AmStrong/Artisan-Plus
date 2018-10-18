@@ -36,6 +36,11 @@ public class Entreprise implements Parcelable{
         this.entrepreneur = entrepreneur;
     }
 
+    //
+    public void addPicture(int picture){
+        lstPictures.add(picture);
+    }
+
     protected Entreprise(Parcel in) {
         image = in.readInt();
         id = in.readInt();
@@ -58,16 +63,6 @@ public class Entreprise implements Parcelable{
             return new Entreprise[size];
         }
     };
-
-    //
-    public void addPicture(int picture){
-        lstPictures.add(picture);
-    }
-
-    public void deletePicture(int picture){
-
-        lstPictures.remove(picture);
-    }
 
     @Override
     public int describeContents() {
