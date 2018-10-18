@@ -94,11 +94,13 @@ public class ProfilEditlActivity extends AppCompatActivity {
         imgProfil.setImageResource(entrepreneur.getPhoto());
         txtNom.setText(entrepreneur.getNom());
         txtPren.setText(entrepreneur.getPrenom());
-        setSpinText(txtSex,utilisateur.getSex());
+        setSpinText(txtSex,entrepreneur.getSex());
 
         telEditAdapter = new TelEditAdapter(this, entrepreneur.getLstContact());
         contactRecyclerView.setAdapter(telEditAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Log.d(TAG, "load: entrepreneur nb contact : "+entrepreneur.getLstContact().size());
     }
 
 

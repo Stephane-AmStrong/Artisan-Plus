@@ -59,5 +59,5 @@ public class Entrepreneur extends Utilisateur implements Parcelable {
         this.passWord = passWord;
     }
 
-    
+
 }
