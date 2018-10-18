@@ -34,8 +34,8 @@ public class ProfilReadActivity extends AppCompatActivity {
     private AppBarLayout mAppBarLayout;
     private Toolbar toolbar;
 
-    public static final String keyUserEdit ="profiledit_key";
-    public static final String keyArtisanEdit ="profiledit_key";
+    public static final String keyUserEdit ="edituser_key";
+    public static final String keyArtisanEdit ="editgeran_key";
 
     private static final String TAG = "ProfilReadActivity";
 
@@ -50,7 +50,8 @@ public class ProfilReadActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(ProfilReadActivity.this,ProfiEditlActivity.class);
+                intent = new Intent(ProfilReadActivity.this,ProfilEditlActivity.class);
+                intent.putExtra(keyUserEdit,utilisateur);
                 startActivity(intent);
             }
         });
@@ -97,7 +98,7 @@ public class ProfilReadActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_edit) {
-            intent = new Intent(ProfilReadActivity.this,ProfiEditlActivity.class);
+            intent = new Intent(ProfilReadActivity.this,ProfilEditlActivity.class);
             startActivity(intent);
         }
 
