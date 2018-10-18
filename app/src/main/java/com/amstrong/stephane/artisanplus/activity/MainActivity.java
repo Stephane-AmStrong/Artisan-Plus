@@ -1,7 +1,6 @@
 package com.amstrong.stephane.artisanplus.activity;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,17 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.AtelierAdapter;
@@ -33,8 +27,6 @@ import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Categorie;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.List;
 
@@ -133,11 +125,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profil) {
             // profil
-            intent = new Intent(this,ProfilActivity.class);
+            intent = new Intent(this,ProfilReadActivity.class);
             intent.putExtra(keyUtilisater,utilisateur);
             startActivity(intent);
 
         } else if (id == R.id.nav_favoris) {
+            intent = new Intent(this,AtelierEditActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_recent) {
 
@@ -168,7 +162,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void connected(){
-        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","98765445","Masculin");
+        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","Masculin","98 76 54 45");
     }
 
     private void load(){
@@ -182,7 +176,6 @@ public class MainActivity extends AppCompatActivity
 
         artisanRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categorieRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
     }
 
 
@@ -244,58 +237,5 @@ public class MainActivity extends AppCompatActivity
         myDialog.show();
     }
 
-    public void showCustomDialog(){
-        TextView txtMessage,btnClose;
-        Button btnSubmit,btnCancel;
-        myDialog.setContentView(R.layout.dialog_message);
-        txtMessage = findViewById(R.id.diag_message);
-        btnClose = findViewById(R.id.diag_btnCancel);
-        btnSubmit = findViewById(R.id.diag_btnOk);
-        btnCancel = findViewById(R.id.diag_btnCancel);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
-    public boolean isSevicesOK(){
-        Log.d(TAG, "isSevicesOK: checking google services version");
-        int available=GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
-
-        if (available==ConnectionResult.SUCCESS){
-            //everything and the user can make map requests
-            Log.d(TAG, "isSevicesOK: Google play services are working");
-            return true;
-        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // an error occured but we can resolve it
-            Log.d(TAG, "isSevicesOK: an error occured but we can resolve it");
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-        }else {
-            Toast.makeText(this,"you can't make map requests",Toast.LENGTH_SHORT).show();
-        }
-        return false;
-    }
 
 }

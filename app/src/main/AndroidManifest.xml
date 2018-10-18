@@ -76,13 +76,19 @@
 >>>>>>> beta
 =======
         <activity
-            android:name=".activity.ProfilActivity"
-            android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/MyTheme" />
-        <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
+<<<<<<< HEAD
         <activity android:name=".activity.EditProfilActivity" />
+>>>>>>> beta
+=======
+        <activity android:name=".activity.ProfilEditlActivity" />
+        <activity android:name=".activity.AtelierEditActivity" />
+        <activity
+            android:name=".activity.ProfilReadActivity"
+            android:label="@string/title_activity_profil"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity"></activity>
 >>>>>>> beta
     </application>
 

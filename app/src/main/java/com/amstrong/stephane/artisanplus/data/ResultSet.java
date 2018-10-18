@@ -14,6 +14,7 @@ public class ResultSet {
 
     private List<Atelier> lstAtelier;
     private Atelier atelier;
+    private Gerant gerant;
     private List<Categorie> lstCategorie;
     private List<Gerant>lstGeran;
     private List<Atelier> lstAtelierMatching;
@@ -64,7 +65,9 @@ public class ResultSet {
     public List<Gerant> getGerant(){
         lstGeran = new ArrayList<>();
         for (int i =0;i<imgGerant.length;i++){
-            lstGeran.add(new Gerant(imgGerant[i],ids[i], nomGerant[i],prenomGerant[i],"97 54 43 32","95 55 66 87",sexGerant[i]));
+            gerant =new Gerant(imgGerant[i],ids[i], nomGerant[i],prenomGerant[i],sexGerant[i],"95 55 66 87");
+            gerant.ajouter("97 54 43 32");
+            lstGeran.add(gerant);
         }
         return lstGeran;
     }

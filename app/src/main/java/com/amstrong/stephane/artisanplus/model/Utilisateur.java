@@ -3,40 +3,28 @@ package com.amstrong.stephane.artisanplus.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utilisateur implements Parcelable {
     private int picture;
     private int id;
-    private String nom, prenom,tel,sex;
+    private String nom, prenom,sex;
+    private List<String> lstContact;
 
-    public Utilisateur(int picture, int id, String nom, String prenom, String tel, String sex) {
+    public Utilisateur(int picture, int id, String nom, String prenom, String sex, String contact) {
         this.picture = picture;
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.tel = tel;
         this.sex = sex;
+        this.lstContact = new ArrayList<>();
+        lstContact.add(contact);
     }
 
-    protected Utilisateur(Parcel in) {
-        picture = in.readInt();
-        id = in.readInt();
-        nom = in.readString();
-        prenom = in.readString();
-        tel = in.readString();
-        sex = in.readString();
+    public void ajouter(String contact){
+        lstContact.add(contact);
     }
-
-    public static final Creator<Utilisateur> CREATOR = new Creator<Utilisateur>() {
-        @Override
-        public Utilisateur createFromParcel(Parcel in) {
-            return new Utilisateur(in);
-        }
-
-        @Override
-        public Utilisateur[] newArray(int size) {
-            return new Utilisateur[size];
-        }
-    };
 
     public int getPicture() {
         return picture;
@@ -70,14 +58,6 @@ public class Utilisateur implements Parcelable {
         this.prenom = prenom;
     }
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
     public String getSex() {
         return sex;
     }
@@ -85,6 +65,35 @@ public class Utilisateur implements Parcelable {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+    public List<String> getLstContact() {
+        return lstContact;
+    }
+
+    public void setLstContact(List<String> lstContact) {
+        this.lstContact = lstContact;
+    }
+
+    protected Utilisateur(Parcel in) {
+        picture = in.readInt();
+        id = in.readInt();
+        nom = in.readString();
+        prenom = in.readString();
+        sex = in.readString();
+        lstContact = in.createStringArrayList();
+    }
+
+    public static final Creator<Utilisateur> CREATOR = new Creator<Utilisateur>() {
+        @Override
+        public Utilisateur createFromParcel(Parcel in) {
+            return new Utilisateur(in);
+        }
+
+        @Override
+        public Utilisateur[] newArray(int size) {
+            return new Utilisateur[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -97,7 +106,7 @@ public class Utilisateur implements Parcelable {
         parcel.writeInt(id);
         parcel.writeString(nom);
         parcel.writeString(prenom);
-        parcel.writeString(tel);
         parcel.writeString(sex);
+        parcel.writeStringList(lstContact);
     }
 }

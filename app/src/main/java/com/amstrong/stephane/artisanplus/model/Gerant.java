@@ -3,19 +3,36 @@ package com.amstrong.stephane.artisanplus.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gerant implements Parcelable{
     int picture;
     int id;
-    private String nom,prenom,sex,tel1,tel2;
+    private String nom,prenom,sex;
+    private List<String>lstContact;
 
-    public Gerant(int picture, int id, String nom, String prenom, String tel1, String tel2, String sex) {
+    public Gerant(int picture, int id, String nom, String prenom, String sex, List<String> lstContact) {
         this.picture = picture;
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.tel1 = tel1;
-        this.tel2 = tel2;
         this.sex = sex;
+        this.lstContact = lstContact;
+    }
+
+    public Gerant(int picture, int id, String nom, String prenom, String sex, String contact) {
+        this.picture = picture;
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sex = sex;
+        this.lstContact = new ArrayList<>();
+        this.lstContact.add(contact);
+    }
+
+    public void ajouter(String contact){
+        lstContact.add(contact);
     }
 
     protected Gerant(Parcel in) {
@@ -24,8 +41,7 @@ public class Gerant implements Parcelable{
         nom = in.readString();
         prenom = in.readString();
         sex = in.readString();
-        tel1 = in.readString();
-        tel2 = in.readString();
+        lstContact = in.createStringArrayList();
     }
 
     public static final Creator<Gerant> CREATOR = new Creator<Gerant>() {
@@ -80,20 +96,12 @@ public class Gerant implements Parcelable{
         this.sex = sex;
     }
 
-    public String getTel1() {
-        return tel1;
+    public List<String> getLstContact() {
+        return lstContact;
     }
 
-    public void setTel1(String tel1) {
-        this.tel1 = tel1;
-    }
-
-    public String getTel2() {
-        return tel2;
-    }
-
-    public void setTel2(String tel2) {
-        this.tel2 = tel2;
+    public void setLstContact(List<String> lstContact) {
+        this.lstContact = lstContact;
     }
 
     @Override
@@ -108,7 +116,6 @@ public class Gerant implements Parcelable{
         parcel.writeString(nom);
         parcel.writeString(prenom);
         parcel.writeString(sex);
-        parcel.writeString(tel1);
-        parcel.writeString(tel2);
+        parcel.writeStringList(lstContact);
     }
 }

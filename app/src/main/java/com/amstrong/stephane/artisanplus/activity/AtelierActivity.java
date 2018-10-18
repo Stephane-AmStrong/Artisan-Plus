@@ -1,17 +1,14 @@
 package com.amstrong.stephane.artisanplus.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,14 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
 import com.amstrong.stephane.artisanplus.model.Atelier;
 import com.amstrong.stephane.artisanplus.model.Gerant;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,9 +47,8 @@ public class AtelierActivity extends AppCompatActivity {
     private PictureAdapter pictureAdapter;
     private RecyclerView pictureRecycler;
     private static final String TAG = "AtelierActivity";
-    private static final int ERROR_DIALOG_REQUEST=9001;
 
-    public static final String keyProfil ="profil_key";
+    public static final String keyProfilRead ="profilread_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +117,8 @@ public class AtelierActivity extends AppCompatActivity {
         gerantRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(AtelierActivity.this,ProfilActivity.class);
-                intent.putExtra(keyProfil,gerant);
+                intent = new Intent(AtelierActivity.this,ProfilReadActivity.class);
+                intent.putExtra(keyProfilRead,gerant);
                 startActivity(intent);
             }
         });
@@ -223,8 +216,12 @@ public class AtelierActivity extends AppCompatActivity {
             txtPicture .setText("Images ("+lstPicture.size()+")");
         }
         txtNomPrenom.setText(gerant.getNom()+" "+gerant.getPrenom());
-        txtTel1.setText(gerant.getTel1());
-        txtTel2 .setText(gerant.getTel2());
+        txtTel1.setText(gerant.getLstContact().get(0));
+        if (gerant.getLstContact().get(1).trim().isEmpty()){
+            txtTel2.setVisibility(View.GONE);
+        }
+        txtTel2 .setText(gerant.getLstContact().get(1));
+
 
         //
         pictureAdapter = new PictureAdapter(this, lstPicture);
