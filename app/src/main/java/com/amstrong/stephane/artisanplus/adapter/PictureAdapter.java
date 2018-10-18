@@ -65,7 +65,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ButtonVi
 
         public ButtonViewHolder(@NonNull View itemView) {
             super(itemView);
-            picture =itemView.findViewById(R.id.picture);
+            picture =itemView.findViewById(R.id.photo);
 
             picture.setOnClickListener(this);
         }

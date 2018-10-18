@@ -21,10 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.AtelierAdapter;
+import com.amstrong.stephane.artisanplus.adapter.EntrepriseAdapter;
 import com.amstrong.stephane.artisanplus.adapter.ButtonAdapter;
 import com.amstrong.stephane.artisanplus.data.ResultSet;
-import com.amstrong.stephane.artisanplus.model.Atelier;
+import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.amstrong.stephane.artisanplus.model.Categorie;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static int colorPrimary,colorPrimaryDark,colorAccent;
-    private AtelierAdapter atelierAdapter;
+    private EntrepriseAdapter entrepriseAdapter;
     private ButtonAdapter buttonAdapter;
     private RecyclerView artisanRecyclerView;
     private RecyclerView categorieRecyclerView;
     private List<Categorie> lstCategorie;
-    private List<Atelier> lstAtelier;
+    private List<Entreprise> lstEntreprise;
     private Intent intent;
 
     private ResultSet resultSet;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     public static final String keyEntreprise ="entreprise_key";
     public static final String keyRechercher="rechercher_key";
     public static final String keyUtilisater="utilisateur_key";
-    private Atelier atelier;
+    private Entreprise entreprise;
     private Categorie categorie;
     private Utilisateur utilisateur;
     private Dialog myDialog;
@@ -130,8 +130,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_favoris) {
-            intent = new Intent(this,AtelierEditActivity.class);
-            startActivity(intent);
+            //
 
         } else if (id == R.id.nav_recent) {
 
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity
         //init data
         resultSet = new ResultSet();
 
-        lstAtelier = resultSet.getLstAtelier();
+        lstEntreprise = resultSet.getLstEntreprise();
         lstCategorie = resultSet.getLstCategorie();
 
         // RecyclerViewer
@@ -162,16 +161,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void connected(){
-        utilisateur = new Utilisateur(R.drawable.profil_12,1,"KODJO","Paulin","Masculin","98 76 54 45");
+        utilisateur = new Utilisateur(R.drawable.profil_12,"U00011","KODJO","Paulin","Masculin","98 76 54 45");
     }
 
     private void load(){
 
         //
-        atelierAdapter = new AtelierAdapter(this, lstAtelier);
+        entrepriseAdapter = new EntrepriseAdapter(this, lstEntreprise);
         buttonAdapter = new ButtonAdapter(this, lstCategorie);
 
-        artisanRecyclerView.setAdapter(atelierAdapter);
+        artisanRecyclerView.setAdapter(entrepriseAdapter);
         categorieRecyclerView.setAdapter(buttonAdapter);
 
         artisanRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -180,10 +179,9 @@ public class MainActivity extends AppCompatActivity
 
 
     public void callEntrepriseActivity(int position ){
-        atelier = lstAtelier.get(position);
-        intent = new Intent(this,AtelierActivity.class);
-        intent.putExtra(keyEntreprise, atelier);
-        intent.putExtra(keyEntreprise, atelier);
+        entreprise = lstEntreprise.get(position);
+        intent = new Intent(this,EntrepriseActivity.class);
+        intent.putExtra(keyEntreprise, entreprise);
         startActivity(intent);
     }
 
@@ -197,9 +195,9 @@ public class MainActivity extends AppCompatActivity
         load(resultSet.removeAteliersMatching(categorie));
     }
 
-    private void load(List<Atelier> ateliers){
-        atelierAdapter = new AtelierAdapter(this, ateliers);
-        artisanRecyclerView.setAdapter(atelierAdapter);
+    private void load(List<Entreprise> entreprises){
+        entrepriseAdapter = new EntrepriseAdapter(this, entreprises);
+        artisanRecyclerView.setAdapter(entrepriseAdapter);
     }
 
     public void showCustomDialog( View view){

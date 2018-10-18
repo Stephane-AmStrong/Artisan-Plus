@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_business"
             android:icon="@drawable/ic_business"
-            android:title="Mes Ateliers" />
+            android:title="Mes Entreprises" />
     </group>
 
 </menu>

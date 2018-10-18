@@ -20,8 +20,8 @@ import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
-import com.amstrong.stephane.artisanplus.model.Atelier;
-import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.amstrong.stephane.artisanplus.model.Entrepreneur;
+import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,12 +29,12 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-public class AtelierActivity extends AppCompatActivity {
+public class EntrepriseActivity extends AppCompatActivity {
 
     private MapFragment mMapFragment ;
     private Intent intent,mapIntent;
-    private Atelier atelier;
-    private Gerant gerant;
+    private Entreprise entreprise;
+    private Entrepreneur entrepreneur;
     private List<Integer> lstPicture;
     private ImageView btnTel1,btnTel2,btnSMS1,btnSMS2;
     private TextView txtPicture;
@@ -46,20 +46,20 @@ public class AtelierActivity extends AppCompatActivity {
     private TextView txtNomEntr,txtNomPrenom,txtTel1,txtTel2, txtDescriptEntr;
     private PictureAdapter pictureAdapter;
     private RecyclerView pictureRecycler;
-    private static final String TAG = "AtelierActivity";
+    private static final String TAG = "EntrepriseActivity";
 
     public static final String keyProfilRead ="profilread_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_atelier);
+        setContentView(R.layout.activity_entreprise);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initialisation();
 
-        loadEntreprise(atelier,gerant);
+        loadEntreprise(entreprise, entrepreneur);
 
         // Map setting
         mMapFragment = MapFragment.newInstance();
@@ -113,12 +113,12 @@ public class AtelierActivity extends AppCompatActivity {
             }
         });
 
-        //gerant
+        //entrepreneur
         gerantRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(AtelierActivity.this,ProfilReadActivity.class);
-                intent.putExtra(keyProfilRead,gerant);
+                intent = new Intent(EntrepriseActivity.this,ProfilReadActivity.class);
+                intent.putExtra(keyProfilRead, entrepreneur);
                 startActivity(intent);
             }
         });
@@ -172,9 +172,9 @@ public class AtelierActivity extends AppCompatActivity {
         intent = getIntent();
         mapIntent = new  Intent(this,MapsActivity.class);
 
-        atelier =intent.getParcelableExtra(entrepriseKey);
-        lstPicture= atelier.getLstPictures();
-        gerant= atelier.getGerant();
+        entreprise =intent.getParcelableExtra(entrepriseKey);
+        lstPicture= entreprise.getLstPictures();
+        entrepreneur = entreprise.getEntrepreneur();
         //
         imgAtelier =findViewById(R.id.atlier_img);
         imgGerant=findViewById(R.id.ger_img);
@@ -195,32 +195,32 @@ public class AtelierActivity extends AppCompatActivity {
         gerantRow = findViewById(R.id.block_gerant);
     }
 
-    private void loadEntreprise(Atelier atelier, Gerant gerant){
-        imgAtelier.setImageResource(atelier.getImage());
-        atlierRating.setRating(atelier.getEtoile());
-        imgGerant.setImageResource(atelier.getGerant().getPicture());
+    private void loadEntreprise(Entreprise entreprise, Entrepreneur entrepreneur){
+        imgAtelier.setImageResource(entreprise.getImage());
+        atlierRating.setRating(entreprise.getEtoile());
+        imgGerant.setImageResource(entreprise.getEntrepreneur().getPhoto());
         /*
 
          Picasso.get()
-                .load(atelier.getGerant().getPicture())
+                .load(entreprise.getEntrepreneur().getPhoto())
                 .resize(600,200)
                 .centerInside()
                 .into(imgGerant);
 
         */
-        txtNomEntr .setText(atelier.getNom());
-        txtDescriptEntr .setText(atelier.getDescription());
+        txtNomEntr .setText(entreprise.getNom());
+        txtDescriptEntr .setText(entreprise.getDescription());
         if(lstPicture.size()<1) {
             txtPicture .setText("Image ("+lstPicture.size()+")");
         } else {
             txtPicture .setText("Images ("+lstPicture.size()+")");
         }
-        txtNomPrenom.setText(gerant.getNom()+" "+gerant.getPrenom());
-        txtTel1.setText(gerant.getLstContact().get(0));
-        if (gerant.getLstContact().get(1).trim().isEmpty()){
+        txtNomPrenom.setText(entrepreneur.getNom()+" "+ entrepreneur.getPrenom());
+        txtTel1.setText(entrepreneur.getLstContact().get(0));
+        if (entrepreneur.getLstContact().get(1).trim().isEmpty()){
             txtTel2.setVisibility(View.GONE);
         }
-        txtTel2 .setText(gerant.getLstContact().get(1));
+        txtTel2 .setText(entrepreneur.getLstContact().get(1));
 
 
         //

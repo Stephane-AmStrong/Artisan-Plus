@@ -3,27 +3,30 @@ package com.amstrong.stephane.artisanplus.data;
 
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.model.Atelier;
+import com.amstrong.stephane.artisanplus.model.Entrepreneur;
+import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.amstrong.stephane.artisanplus.model.Categorie;
-import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResultSet {
 
-    private List<Atelier> lstAtelier;
-    private Atelier atelier;
-    private Gerant gerant;
+    private List<Entreprise> lstEntreprise;
+    private Entreprise entreprise;
+    private Entrepreneur entrepreneur;
     private List<Categorie> lstCategorie;
-    private List<Gerant>lstGeran;
-    private List<Atelier> lstAtelierMatching;
+    private List<Utilisateur>lstUser;
+    private List<Entrepreneur>lstEntrepreneur;
+    private List<Entreprise> lstEntrepriseMatching;
 
     public ResultSet() {
-        lstAtelier = new ArrayList<>();
+        lstEntreprise = new ArrayList<>();
         lstCategorie = new ArrayList<>();
-        lstGeran = new ArrayList<>();
-        lstAtelierMatching=new ArrayList<>();
+        lstUser = new ArrayList<>();
+        lstEntrepreneur = new ArrayList<>();
+        lstEntrepriseMatching =new ArrayList<>();
         this.getEntreprise();
         getCategories();
         setCategories();
@@ -46,11 +49,8 @@ public class ResultSet {
     };
 
     private float [] ratings = {3,2,1,4,4,2,5,4,1,5};
-    private int[] ids = {1,2,3,4,5,6,7,8,9,10};
+    private String[] ids = {"E0001","E0002","E0003","E0004","E0005","E0006","E0007","E0008","E0009","E00010"};
     private String[] nomAtelier ={"BIO & Fils","TALO Mahouton","KOSSOU Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
-    private String[] nomGerant ={"BIO","TALO","Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
-    private String[] prenomGerant ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","George","Oscar"};
-    private String [] sexGerant = {"Féminin","Féminin","Masculin","Féminin","Masculin","Féminin","Féminin","Masculin","Masculin","Masculin"};
     private String[] nomCategories ={"Salon de beauté","Construction & BTP","Salon de beauté","Patisserie","Commerce Général"};
 <<<<<<< HEAD
     private String[][] lesProfession ={{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"},{"Salon de coiffure","Décoration intérieur","Commerce de pagne"},{"Construction","Menuserie","Charpenterie"},{"Couture","Stylisme","recyclage"},{"Boulangerie","Vente de pain","Vente de gateau"},{"Super Marché","vente de divers","vente de cosmétique"}};
@@ -61,21 +61,33 @@ public class ResultSet {
 >>>>>>> beta
 =======
 
+<<<<<<< HEAD
 >>>>>>> beta
     public List<Gerant> getGerant(){
         lstGeran = new ArrayList<>();
+=======
+    private String[] nomUser ={"BIO","TALO","Alurgie","ALIGBO","MIDJO","DASILVA","DE SOUZA","SAGBO","ALISONTO","ADOUKONON"};
+    private String[] prenUser ={"Olivia","Sophia","Jack","Emily","Noah","Mia","Isabella","Alfie","George","Oscar"};
+    private String [] sexUser = {"Féminin","Féminin","Masculin","Féminin","Masculin","Féminin","Féminin","Masculin","Masculin","Masculin"};
+    private String [] tel1User = {"97 45 56 75","99 34 65 25","92 45 56 78","96 34 64 87","90 21 35 76","67 34 65 76","94 32 46 86","91 45 76 32","95 35 75 90","62 85 96 35"};
+    private String [] tel2User = {"61 45 56 75","90 34 65 25","92 45 56 78","96 34 53 87","91 21 35 76","69 34 65 76","74 32 46 86","91 45 76 32","95 35 75 90","62 85 96 35"};    private String [] pwdGerant = {"papa","maman","fils","filston","toto","isnogood","ismytree","colosuc","nicoledon","nipo"};
+
+    public List<Entrepreneur> getEntrepreneur(){
+>>>>>>> beta
         for (int i =0;i<imgGerant.length;i++){
-            gerant =new Gerant(imgGerant[i],ids[i], nomGerant[i],prenomGerant[i],sexGerant[i],"95 55 66 87");
-            gerant.ajouter("97 54 43 32");
-            lstGeran.add(gerant);
+            entrepreneur =new Entrepreneur(imgGerant[i],ids[i], nomUser[i], prenUser[i], sexUser[i], tel1User[i],pwdGerant[i]);
+            entrepreneur.ajouter(tel2User[i]);
+            lstEntrepreneur.add(entrepreneur);
         }
-        return lstGeran;
+        lstUser.addAll(lstEntrepreneur);
+        lstUser.add(new Utilisateur(R.drawable.profil_12,"U00011","KODJO","Paulin","Masculin","98 76 54 45"));
+        return lstEntrepreneur;
     }
 
-    public List<Atelier> getEntreprise(){
-        lstAtelier = new ArrayList<>();
+    public List<Entreprise> getEntreprise(){
+        lstEntreprise = new ArrayList<>();
 
-        getGerant();
+        getEntrepreneur();
 
         for (int i = 0; i< imgAtelier.length; i++){
             List<Categorie> lstProfess = new ArrayList<>();
@@ -83,15 +95,15 @@ public class ResultSet {
             // descritpion
             lstProfess.add(new Categorie(lesDescription[i]));
 
-            atelier = new Atelier(imgAtelier[i],ids[i], nomAtelier[i],lesDescription[i], ratings[i],lstGeran.get(i));
+            entreprise = new Entreprise(imgAtelier[i],i, nomAtelier[i],lesDescription[i], ratings[i],lstEntrepreneur.get(i));
 
             for (int j=0;j<tabPicture[i].length;j++){
-                atelier.addPicture(tabPicture[i][j]);
+                entreprise.addPicture(tabPicture[i][j]);
             }
 
-            lstAtelier.add(atelier);
+            lstEntreprise.add(entreprise);
         }
-        return lstAtelier;
+        return lstEntreprise;
     }
 
     public List<Categorie> getCategories(){
@@ -102,26 +114,26 @@ public class ResultSet {
         return lstCategorie;
     }
 
-    public List<Atelier> addAteliersMatching(Categorie categorie){
-        for (Atelier atelier:lstAtelier) {
-            if (atelier.getCategorie().equals(categorie)) lstAtelierMatching.add(atelier);
+    public List<Entreprise> addAteliersMatching(Categorie categorie){
+        for (Entreprise entreprise : lstEntreprise) {
+            if (entreprise.getCategorie().equals(categorie)) lstEntrepriseMatching.add(entreprise);
         }
-        return lstAtelierMatching;
+        return lstEntrepriseMatching;
     }
 
-    public List<Atelier> removeAteliersMatching(Categorie categorie){
-        for (Atelier atelier:lstAtelier) {
-            if (atelier.getCategorie().equals(categorie)) lstAtelierMatching.remove(atelier);
+    public List<Entreprise> removeAteliersMatching(Categorie categorie){
+        for (Entreprise entreprise : lstEntreprise) {
+            if (entreprise.getCategorie().equals(categorie)) lstEntrepriseMatching.remove(entreprise);
         }
-        if (lstAtelierMatching.size()==0) return lstAtelier;
-        return lstAtelierMatching;
+        if (lstEntrepriseMatching.size()==0) return lstEntreprise;
+        return lstEntrepriseMatching;
     }
 
     private void setCategories(){
         int index =0;
         for (int i=0;i<imgAtelier.length/nomCategories.length;i++){
             for (int j=0;j<nomCategories.length;j++){
-                lstAtelier.get(index).setCategorie(lstCategorie.get(j));
+                lstEntreprise.get(index).setCategorie(lstCategorie.get(j));
                 index++;
             }
         }
@@ -129,23 +141,19 @@ public class ResultSet {
 
     private void setPicturesUp(){
         for (int i = 0; i< tabPicture.length; i++){
-            atelier = lstAtelier.get(i);
+            entreprise = lstEntreprise.get(i);
             for (int j=0;j<tabPicture[i].length;j++){
-                atelier.addPicture(tabPicture[i][j]);
+                entreprise.addPicture(tabPicture[i][j]);
             }
         }
     }
 
-    public List<Atelier> getLstAtelier() {
-        return lstAtelier;
+    public List<Entreprise> getLstEntreprise() {
+        return lstEntreprise;
     }
 
     public List<Categorie> getLstCategorie() {
         return lstCategorie;
-    }
-
-    public List<Gerant> getLstGeran() {
-        return lstGeran;
     }
 
 }

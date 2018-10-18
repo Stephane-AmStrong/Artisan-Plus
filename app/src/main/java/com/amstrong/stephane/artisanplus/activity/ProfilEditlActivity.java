@@ -17,13 +17,12 @@ import android.widget.Spinner;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.TelEditAdapter;
-import com.amstrong.stephane.artisanplus.adapter.TelReadAdapter;
-import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
 public class ProfilEditlActivity extends AppCompatActivity {
     private Intent intent;
-    private Gerant gerant;
+    private Entrepreneur entrepreneur;
     private Utilisateur utilisateur;
     private ImageView imgProfil;
     private Button btnImg,btnAddContact,btnAddAtelier;
@@ -37,7 +36,7 @@ public class ProfilEditlActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfilEditlActivity";
     private String userEditKey = ProfilReadActivity.keyUserEdit;
-    private String artisanEditKey = ProfilReadActivity.keyArtisanEdit;
+    private String artisanEditKey = ProfilReadActivity.keyEntrepreneurEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +63,14 @@ public class ProfilEditlActivity extends AppCompatActivity {
 
     private void load(){
         try {
-            if (intent.getExtras().keySet().contains(artisanEditKey)){
-                gerant = intent.getParcelableExtra(artisanEditKey);
-                load(gerant); return;
-            }
-
             if (intent.getExtras().keySet().contains(userEditKey)){
                 utilisateur = intent.getParcelableExtra(userEditKey);
                 load(utilisateur);return;
+            }
+
+            if (intent.getExtras().keySet().contains(artisanEditKey)){
+                entrepreneur = intent.getParcelableExtra(artisanEditKey);
+                load(entrepreneur); return;
             }
         } catch (Exception e){
             Log.e(TAG, "load: erreur",e );
@@ -79,7 +78,7 @@ public class ProfilEditlActivity extends AppCompatActivity {
     }
 
     private void load(Utilisateur utilisateur){
-        imgProfil.setImageResource(utilisateur.getPicture());
+        imgProfil.setImageResource(utilisateur.getPhoto());
         txtNom.setText(utilisateur.getNom());
         txtPren.setText(utilisateur.getPrenom());
         setSpinText(txtSex,utilisateur.getSex());
@@ -91,15 +90,17 @@ public class ProfilEditlActivity extends AppCompatActivity {
         blockAtelier.setVisibility(View.GONE);
     }
 
-    private void load(Gerant gerant){
-        imgProfil.setImageResource(gerant.getPicture());
-        txtNom.setText(gerant.getNom());
-        txtPren.setText(gerant.getPrenom());
-        setSpinText(txtSex,utilisateur.getSex());
+    private void load(Entrepreneur entrepreneur){
+        imgProfil.setImageResource(entrepreneur.getPhoto());
+        txtNom.setText(entrepreneur.getNom());
+        txtPren.setText(entrepreneur.getPrenom());
+        setSpinText(txtSex,entrepreneur.getSex());
 
-        telEditAdapter = new TelEditAdapter(this,gerant.getLstContact());
+        telEditAdapter = new TelEditAdapter(this, entrepreneur.getLstContact());
         contactRecyclerView.setAdapter(telEditAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Log.d(TAG, "load: entrepreneur nb contact : "+entrepreneur.getLstContact().size());
     }
 
 

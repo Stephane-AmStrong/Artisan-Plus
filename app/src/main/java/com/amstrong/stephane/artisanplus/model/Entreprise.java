@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Atelier implements Parcelable{
+public class Entreprise implements Parcelable{
 
     private int image;
     private int id;
@@ -15,28 +15,33 @@ public class Atelier implements Parcelable{
     private Categorie categorie;
     private float etoile;
     private List<Integer> lstPictures = new ArrayList<Integer>();
-    private Gerant gerant;
+    private Entrepreneur entrepreneur;
 
-    public Atelier(int image, int id, String nom, String description, Categorie categorie, float etoile, Gerant gerant) {
+    public Entreprise(int image, int id, String nom, String description, Categorie categorie, float etoile, Entrepreneur entrepreneur) {
         this.image = image;
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.categorie = categorie;
         this.etoile = etoile;
-        this.gerant = gerant;
+        this.entrepreneur = entrepreneur;
     }
 
-    public Atelier(int image, int id, String nom, String description, float etoile, Gerant gerant) {
+    public Entreprise(int image, int id, String nom, String description, float etoile, Entrepreneur entrepreneur) {
         this.image = image;
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.etoile = etoile;
-        this.gerant = gerant;
+        this.entrepreneur = entrepreneur;
     }
 
-    protected Atelier(Parcel in) {
+    //
+    public void addPicture(int picture){
+        lstPictures.add(picture);
+    }
+
+    protected Entreprise(Parcel in) {
         image = in.readInt();
         id = in.readInt();
         nom = in.readString();
@@ -44,30 +49,20 @@ public class Atelier implements Parcelable{
         categorie = in.readParcelable(Categorie.class.getClassLoader());
         etoile = in.readFloat();
         in.readList(lstPictures,null);
-        gerant = in.readParcelable(Gerant.class.getClassLoader());
+        entrepreneur = in.readParcelable(Entrepreneur.class.getClassLoader());
     }
 
-    public static final Creator<Atelier> CREATOR = new Creator<Atelier>() {
+    public static final Creator<Entreprise> CREATOR = new Creator<Entreprise>() {
         @Override
-        public Atelier createFromParcel(Parcel in) {
-            return new Atelier(in);
+        public Entreprise createFromParcel(Parcel in) {
+            return new Entreprise(in);
         }
 
         @Override
-        public Atelier[] newArray(int size) {
-            return new Atelier[size];
+        public Entreprise[] newArray(int size) {
+            return new Entreprise[size];
         }
     };
-
-    //
-    public void addPicture(int picture){
-        lstPictures.add(picture);
-    }
-
-    public void deletePicture(int picture){
-
-        lstPictures.remove(picture);
-    }
 
     @Override
     public int describeContents() {
@@ -83,7 +78,7 @@ public class Atelier implements Parcelable{
         parcel.writeParcelable(categorie, i);
         parcel.writeFloat(etoile);
         parcel.writeList(lstPictures);
-        parcel.writeParcelable(gerant, i);
+        parcel.writeParcelable(entrepreneur, i);
     }
 
     public int getImage() {
@@ -142,11 +137,11 @@ public class Atelier implements Parcelable{
         this.lstPictures = lstPictures;
     }
 
-    public Gerant getGerant() {
-        return gerant;
+    public Entrepreneur getEntrepreneur() {
+        return entrepreneur;
     }
 
-    public void setGerant(Gerant gerant) {
-        this.gerant = gerant;
+    public void setEntrepreneur(Entrepreneur entrepreneur) {
+        this.entrepreneur = entrepreneur;
     }
 }

@@ -17,14 +17,14 @@ import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.TelReadAdapter;
-import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
 public class ProfilReadActivity extends AppCompatActivity {
     private Intent intent;
-    private Gerant gerant;
+    private Entrepreneur entrepreneur;
     private Utilisateur utilisateur;
-    private String atelierKey = AtelierActivity.keyProfilRead;
+    private String atelierKey = EntrepriseActivity.keyProfilRead;
     private String userKey = MainActivity.keyUtilisater;
     private ImageView imgProfil;
     private TextView txtSex;
@@ -35,7 +35,7 @@ public class ProfilReadActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     public static final String keyUserEdit ="edituser_key";
-    public static final String keyArtisanEdit ="editgeran_key";
+    public static final String keyEntrepreneurEdit ="editgeran_key";
 
     private static final String TAG = "ProfilReadActivity";
 
@@ -50,8 +50,7 @@ public class ProfilReadActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(ProfilReadActivity.this,ProfilEditlActivity.class);
-                intent.putExtra(keyUserEdit,utilisateur);
+                //démarrer l'activité en fonction de l'appel précédent
                 startActivity(intent);
             }
         });
@@ -126,39 +125,46 @@ public class ProfilReadActivity extends AppCompatActivity {
     private void load(){
 
         try {
-            if (intent.getExtras().keySet().contains(atelierKey)){
-                gerant = intent.getParcelableExtra(atelierKey);
-                load(gerant); return;
-            }
-
             if (intent.getExtras().keySet().contains(userKey)){
                 utilisateur = intent.getParcelableExtra(userKey);
                 load(utilisateur);return;
             }
+
+            if (intent.getExtras().keySet().contains(atelierKey)){
+                entrepreneur = intent.getParcelableExtra(atelierKey);
+                load(entrepreneur); return;
+            }
+
         } catch (Exception e){
             Log.e(TAG, "load: erreur",e );
         }
     }
 
-    private void load(Gerant gerant){
-        imgProfil.setImageResource(gerant.getPicture());
-
-        setTitle(gerant.getNom()+" "+gerant.getPrenom());
-        txtSex.setText(gerant.getSex());
-
-        telReadAdapter = new TelReadAdapter(this,gerant.getLstContact());
-        contactRecyclerView.setAdapter(telReadAdapter);
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
     private void load(Utilisateur utilisateur){
-        imgProfil.setImageResource(utilisateur.getPicture());
+        imgProfil.setImageResource(utilisateur.getPhoto());
         setTitle(utilisateur.getNom()+" "+ utilisateur.getPrenom());
         txtSex.setText(utilisateur.getSex());
 
         telReadAdapter = new TelReadAdapter(this,utilisateur.getLstContact());
         contactRecyclerView.setAdapter(telReadAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        intent = new Intent(this,ProfilEditlActivity.class);
+        intent.putExtra(keyUserEdit,utilisateur);
+    }
+
+    private void load(Entrepreneur entrepreneur){
+        imgProfil.setImageResource(entrepreneur.getPhoto());
+
+        setTitle(entrepreneur.getNom()+" "+ entrepreneur.getPrenom());
+        txtSex.setText(entrepreneur.getSex());
+
+        telReadAdapter = new TelReadAdapter(this, entrepreneur.getLstContact());
+        contactRecyclerView.setAdapter(telReadAdapter);
+        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        intent = new Intent(this,ProfilEditlActivity.class);
+        intent.putExtra(keyEntrepreneurEdit,entrepreneur);
     }
 
 }

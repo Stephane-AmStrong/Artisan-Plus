@@ -13,23 +13,23 @@ import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.activity.MainActivity;
-import com.amstrong.stephane.artisanplus.model.Atelier;
+import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanViewHolder> {
+public class EntrepriseAdapter extends RecyclerView.Adapter<EntrepriseAdapter.ArtisanViewHolder> {
     private LayoutInflater inflater;
     private Context context;
-    private Atelier atelier;
+    private Entreprise entreprise;
     private MainActivity mainActivity;
     private View view;
-    private List<Atelier> lstAtelier;
+    private List<Entreprise> lstEntreprise;
 
-    public AtelierAdapter(Context context, List<Atelier> lstAtelier) {
+    public EntrepriseAdapter(Context context, List<Entreprise> lstEntreprise) {
         this.context = context;
         inflater=LayoutInflater.from(context);
-        this.lstAtelier = lstAtelier;
+        this.lstEntreprise = lstEntreprise;
         this.mainActivity = (MainActivity) context;
     }
 
@@ -38,30 +38,30 @@ public class AtelierAdapter extends RecyclerView.Adapter<AtelierAdapter.ArtisanV
     @NonNull
     @Override
     public ArtisanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = inflater.inflate(R.layout.row_atelier,parent,false);
+        view = inflater.inflate(R.layout.row_entreprise,parent,false);
         ArtisanViewHolder artisanViewHolder = new ArtisanViewHolder(view);
         return artisanViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ArtisanViewHolder holder, int position) {
-        atelier = lstAtelier.get(position);
+        entreprise = lstEntreprise.get(position);
 
         Picasso.get()
-                .load(atelier.getImage())
+                .load(entreprise.getImage())
                 .resize(120,120)
                 .centerCrop()
                 .into(holder.imgAtelier);
 
-        holder.txtEntrNom.setText(atelier.getNom());
-        holder.txtEntrCateg.setText(atelier.getCategorie().getLibelle());
-        holder.txtDescription.setText(atelier.getDescription());
-        holder.ratingBar.setRating(atelier.getEtoile());
+        holder.txtEntrNom.setText(entreprise.getNom());
+        holder.txtEntrCateg.setText(entreprise.getCategorie().getLibelle());
+        holder.txtDescription.setText(entreprise.getDescription());
+        holder.ratingBar.setRating(entreprise.getEtoile());
     }
 
     @Override
     public int getItemCount() {
-        return lstAtelier.size();
+        return lstEntreprise.size();
     }
 
     class ArtisanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

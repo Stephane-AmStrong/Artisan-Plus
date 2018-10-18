@@ -8,21 +8,21 @@ public class Vote implements Parcelable {
     private int note;
     private String comment;
     private Utilisateur utilisateur;
-    private Atelier atelier;
+    private Entreprise entreprise;
 
-    public Vote(int id, int note, String comment, Utilisateur utilisateur, Atelier atelier) {
+    public Vote(int id, int note, String comment, Utilisateur utilisateur, Entreprise entreprise) {
         this.id = id;
         this.note = note;
         this.comment = comment;
         this.utilisateur = utilisateur;
-        this.atelier = atelier;
+        this.entreprise = entreprise;
     }
 
     protected Vote(Parcel in) {
         id = in.readInt();
         note = in.readInt();
         comment = in.readString();
-        atelier = in.readParcelable(Atelier.class.getClassLoader());
+        entreprise = in.readParcelable(Entreprise.class.getClassLoader());
     }
 
     public static final Creator<Vote> CREATOR = new Creator<Vote>() {
@@ -69,12 +69,12 @@ public class Vote implements Parcelable {
         this.utilisateur = utilisateur;
     }
 
-    public Atelier getAtelier() {
-        return atelier;
+    public Entreprise getEntreprise() {
+        return entreprise;
     }
 
-    public void setAtelier(Atelier atelier) {
-        this.atelier = atelier;
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
     }
 
     @Override
@@ -87,6 +87,6 @@ public class Vote implements Parcelable {
         parcel.writeInt(id);
         parcel.writeInt(note);
         parcel.writeString(comment);
-        parcel.writeParcelable(atelier, i);
+        parcel.writeParcelable(entreprise, i);
     }
 }
