@@ -34,10 +34,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AtelierActivity"
+            android:name=".activity.EntrepriseActivity"
             android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".activity.GerantActivity"
+            android:name=".activity.EntrepreneurActivity"
             android:parentActivityName=".activity.MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -59,7 +59,7 @@
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activity.ProfilEditlActivity" />
-        <activity android:name=".activity.AtelierEditActivity" />
+        <activity android:name=".activity.EntrepriseEditActivity" />
         <activity
             android:name=".activity.ProfilReadActivity"
             android:label="@string/title_activity_profil"

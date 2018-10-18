@@ -17,13 +17,12 @@ import android.widget.Spinner;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.adapter.TelEditAdapter;
-import com.amstrong.stephane.artisanplus.adapter.TelReadAdapter;
-import com.amstrong.stephane.artisanplus.model.Gerant;
+import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
 public class ProfilEditlActivity extends AppCompatActivity {
     private Intent intent;
-    private Gerant gerant;
+    private Entrepreneur entrepreneur;
     private Utilisateur utilisateur;
     private ImageView imgProfil;
     private Button btnImg,btnAddContact,btnAddAtelier;
@@ -65,8 +64,8 @@ public class ProfilEditlActivity extends AppCompatActivity {
     private void load(){
         try {
             if (intent.getExtras().keySet().contains(artisanEditKey)){
-                gerant = intent.getParcelableExtra(artisanEditKey);
-                load(gerant); return;
+                entrepreneur = intent.getParcelableExtra(artisanEditKey);
+                load(entrepreneur); return;
             }
 
             if (intent.getExtras().keySet().contains(userEditKey)){
@@ -79,7 +78,7 @@ public class ProfilEditlActivity extends AppCompatActivity {
     }
 
     private void load(Utilisateur utilisateur){
-        imgProfil.setImageResource(utilisateur.getPicture());
+        imgProfil.setImageResource(utilisateur.getPhoto());
         txtNom.setText(utilisateur.getNom());
         txtPren.setText(utilisateur.getPrenom());
         setSpinText(txtSex,utilisateur.getSex());
@@ -91,13 +90,13 @@ public class ProfilEditlActivity extends AppCompatActivity {
         blockAtelier.setVisibility(View.GONE);
     }
 
-    private void load(Gerant gerant){
-        imgProfil.setImageResource(gerant.getPicture());
-        txtNom.setText(gerant.getNom());
-        txtPren.setText(gerant.getPrenom());
+    private void load(Entrepreneur entrepreneur){
+        imgProfil.setImageResource(entrepreneur.getPhoto());
+        txtNom.setText(entrepreneur.getNom());
+        txtPren.setText(entrepreneur.getPrenom());
         setSpinText(txtSex,utilisateur.getSex());
 
-        telEditAdapter = new TelEditAdapter(this,gerant.getLstContact());
+        telEditAdapter = new TelEditAdapter(this, entrepreneur.getLstContact());
         contactRecyclerView.setAdapter(telEditAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

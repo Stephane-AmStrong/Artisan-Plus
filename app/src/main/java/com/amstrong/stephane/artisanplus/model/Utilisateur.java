@@ -7,38 +7,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utilisateur implements Parcelable {
-    private int picture;
-    private int id;
+    private int photo;
+    private String id;
     private String nom, prenom,sex;
     private List<String> lstContact;
 
-    public Utilisateur(int picture, int id, String nom, String prenom, String sex, String contact) {
-        this.picture = picture;
+    public Utilisateur(int photo, String id, String nom, String prenom, String sex, String contact) {
+        this.photo = photo;
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.sex = sex;
         this.lstContact = new ArrayList<>();
-        lstContact.add(contact);
+        this.addTel(contact);
+    }
+
+    public Utilisateur(int photo, String id, String nom, String prenom, String sex, List<String> lstContact) {
+        this.photo = photo;
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sex = sex;
+        this.lstContact = lstContact;
+    }
+
+    public void addTel(String tel){
+        lstContact.add(tel);
     }
 
     public void ajouter(String contact){
         lstContact.add(contact);
     }
 
-    public int getPicture() {
-        return picture;
+    public int getPhoto() {
+        return photo;
     }
 
-    public void setPicture(int picture) {
-        this.picture = picture;
+    public void setPhoto(int photo) {
+        this.photo = photo;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -75,8 +88,8 @@ public class Utilisateur implements Parcelable {
     }
 
     protected Utilisateur(Parcel in) {
-        picture = in.readInt();
-        id = in.readInt();
+        photo = in.readInt();
+        id = in.readString();
         nom = in.readString();
         prenom = in.readString();
         sex = in.readString();
@@ -102,8 +115,8 @@ public class Utilisateur implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(picture);
-        parcel.writeInt(id);
+        parcel.writeInt(photo);
+        parcel.writeString(id);
         parcel.writeString(nom);
         parcel.writeString(prenom);
         parcel.writeString(sex);
