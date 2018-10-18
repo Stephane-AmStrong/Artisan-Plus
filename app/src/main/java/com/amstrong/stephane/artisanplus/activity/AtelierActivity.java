@@ -47,9 +47,8 @@ public class AtelierActivity extends AppCompatActivity {
     private PictureAdapter pictureAdapter;
     private RecyclerView pictureRecycler;
     private static final String TAG = "AtelierActivity";
-    private static final int ERROR_DIALOG_REQUEST=9001;
 
-    public static final String keyProfil ="profil_key";
+    public static final String keyProfilRead ="profilread_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +117,8 @@ public class AtelierActivity extends AppCompatActivity {
         gerantRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(AtelierActivity.this,ProfilActivity.class);
-                intent.putExtra(keyProfil,gerant);
+                intent = new Intent(AtelierActivity.this,ProfilReadActivity.class);
+                intent.putExtra(keyProfilRead,gerant);
                 startActivity(intent);
             }
         });

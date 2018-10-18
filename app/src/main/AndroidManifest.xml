@@ -61,7 +61,7 @@
         <activity android:name=".activity.ProfiEditlActivity" />
         <activity android:name=".activity.AtelierEditActivity" />
         <activity
-            android:name=".activity.ProfilActivity"
+            android:name=".activity.ProfilReadActivity"
             android:label="@string/title_activity_profil"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".activity.MainActivity"></activity>

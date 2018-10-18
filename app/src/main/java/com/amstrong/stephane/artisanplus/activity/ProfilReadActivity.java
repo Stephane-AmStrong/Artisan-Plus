@@ -16,29 +16,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.TelephoneAdapter;
+import com.amstrong.stephane.artisanplus.adapter.TelReadAdapter;
 import com.amstrong.stephane.artisanplus.model.Gerant;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProfilActivity extends AppCompatActivity {
+public class ProfilReadActivity extends AppCompatActivity {
     private Intent intent;
     private Gerant gerant;
     private Utilisateur utilisateur;
-    private String atelierKey = AtelierActivity.keyProfil;
+    private String atelierKey = AtelierActivity.keyProfilRead;
     private String userKey = MainActivity.keyUtilisater;
     private ImageView imgProfil;
     private TextView txtSex;
     private RecyclerView contactRecyclerView;
-    private TelephoneAdapter telephoneAdapter;
-    private List<String> lstTelephone;
+    private TelReadAdapter telReadAdapter;
     private Menu menu;
     private AppBarLayout mAppBarLayout;
     private Toolbar toolbar;
 
-    private static final String TAG = "ProfilActivity";
+    public static final String keyUserEdit ="profiledit_key";
+    public static final String keyArtisanEdit ="profiledit_key";
+
+    private static final String TAG = "ProfilReadActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class ProfilActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(ProfilActivity.this,ProfiEditlActivity.class);
+                intent = new Intent(ProfilReadActivity.this,ProfiEditlActivity.class);
                 startActivity(intent);
             }
         });
@@ -98,7 +97,7 @@ public class ProfilActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_edit) {
-            intent = new Intent(ProfilActivity.this,ProfiEditlActivity.class);
+            intent = new Intent(ProfilReadActivity.this,ProfiEditlActivity.class);
             startActivity(intent);
         }
 
@@ -116,8 +115,6 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     private void init(){
-        lstTelephone = new ArrayList<>();
-        //
         intent = getIntent();
 
         imgProfil = findViewById(R.id.profil_img);
@@ -148,8 +145,8 @@ public class ProfilActivity extends AppCompatActivity {
         setTitle(gerant.getNom()+" "+gerant.getPrenom());
         txtSex.setText(gerant.getSex());
 
-        telephoneAdapter = new TelephoneAdapter(this,gerant.getLstContact());
-        contactRecyclerView.setAdapter(telephoneAdapter);
+        telReadAdapter = new TelReadAdapter(this,gerant.getLstContact());
+        contactRecyclerView.setAdapter(telReadAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -158,8 +155,8 @@ public class ProfilActivity extends AppCompatActivity {
         setTitle(utilisateur.getNom()+" "+ utilisateur.getPrenom());
         txtSex.setText(utilisateur.getSex());
 
-        telephoneAdapter = new TelephoneAdapter(this,utilisateur.getLstContact());
-        contactRecyclerView.setAdapter(telephoneAdapter);
+        telReadAdapter = new TelReadAdapter(this,utilisateur.getLstContact());
+        contactRecyclerView.setAdapter(telReadAdapter);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 

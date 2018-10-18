@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profil) {
             // profil
-            intent = new Intent(this,ProfilActivity.class);
+            intent = new Intent(this,ProfilReadActivity.class);
             intent.putExtra(keyUtilisater,utilisateur);
             startActivity(intent);
 

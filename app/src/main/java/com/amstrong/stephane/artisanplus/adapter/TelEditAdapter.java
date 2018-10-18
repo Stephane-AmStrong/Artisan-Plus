@@ -6,39 +6,39 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.activity.ProfilActivity;
+import com.amstrong.stephane.artisanplus.activity.ProfilReadActivity;
 
 import java.util.List;
 
-public class TelephoneAdapter extends RecyclerView.Adapter<TelephoneAdapter.TelephoneViewHolder>{
+public class TelEditAdapter extends RecyclerView.Adapter<TelEditAdapter.TelEditViewHolder>{
     private Context context;
     private LayoutInflater layoutInflater;
     private List<String> lstContact;
     private String contact;
     private View view;
-    private ProfilActivity profilActivity;
+    private ProfilReadActivity profilReadActivity;
 
 
-    public TelephoneAdapter(Context context, List<String> lstContact) {
+    public TelEditAdapter(Context context, List<String> lstContact) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.lstContact = lstContact;
-        this.profilActivity = (ProfilActivity) context;
+        this.profilReadActivity = (ProfilReadActivity) context;
     }
 
     @NonNull
     @Override
-    public TelephoneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = layoutInflater.inflate(R.layout.row_phone_read,parent,false);
-        TelephoneViewHolder telephoneViewHolder = new TelephoneViewHolder(view);
-        return telephoneViewHolder;
+    public TelEditViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        view = layoutInflater.inflate(R.layout.row_phone_edit,parent,false);
+        TelEditViewHolder telEditViewHolder = new TelEditViewHolder(view);
+        return telEditViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TelephoneViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TelEditViewHolder holder, int position) {
         holder.txtTel.setText(lstContact.get(position));
     }
 
@@ -47,14 +47,14 @@ public class TelephoneAdapter extends RecyclerView.Adapter<TelephoneAdapter.Tele
         return lstContact.size();
     }
 
-    class TelephoneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class TelEditViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView txtTel;
+        EditText txtTel;
 
-        public TelephoneViewHolder(@NonNull View itemView) {
+        public TelEditViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txtTel =itemView.findViewById(R.id.view_tel);
+            txtTel =itemView.findViewById(R.id.edit_tel);
             //txtTel.setOnClickListener(this);
         }
 
