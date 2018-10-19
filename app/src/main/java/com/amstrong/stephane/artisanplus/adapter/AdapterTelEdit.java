@@ -10,11 +10,10 @@ import android.widget.EditText;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.activity.ProfilEditlActivity;
-import com.amstrong.stephane.artisanplus.activity.ProfilReadActivity;
 
 import java.util.List;
 
-public class TelEditAdapter extends RecyclerView.Adapter<TelEditAdapter.TelEditViewHolder>{
+public class AdapterTelEdit extends RecyclerView.Adapter<AdapterTelEdit.TelEditViewHolder>{
     private Context context;
     private LayoutInflater layoutInflater;
     private List<String> lstContact;
@@ -23,7 +22,7 @@ public class TelEditAdapter extends RecyclerView.Adapter<TelEditAdapter.TelEditV
     private ProfilEditlActivity profilEditActivity;
 
 
-    public TelEditAdapter(Context context, List<String> lstContact) {
+    public AdapterTelEdit(Context context, List<String> lstContact) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.lstContact = lstContact;

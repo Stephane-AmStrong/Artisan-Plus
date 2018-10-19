@@ -13,27 +13,29 @@ import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
 import com.amstrong.stephane.artisanplus.activity.MainActivity;
+import com.amstrong.stephane.artisanplus.activity.ProfilReadActivity;
 import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class EntrepriseAdapter extends RecyclerView.Adapter<EntrepriseAdapter.ArtisanViewHolder> {
+public class AdapterEntreprise extends RecyclerView.Adapter<AdapterEntreprise.ArtisanViewHolder> {
     private LayoutInflater inflater;
     private Context context;
     private Entreprise entreprise;
     private MainActivity mainActivity;
+    private ProfilReadActivity profilReadActivity;
     private View view;
     private List<Entreprise> lstEntreprise;
 
-    public EntrepriseAdapter(Context context, List<Entreprise> lstEntreprise) {
+    public AdapterEntreprise(Context context, List<Entreprise> lstEntreprise) {
         this.context = context;
         inflater=LayoutInflater.from(context);
         this.lstEntreprise = lstEntreprise;
-        this.mainActivity = (MainActivity) context;
+        if (context instanceof MainActivity) this.mainActivity = (MainActivity) context;
+        if (context instanceof ProfilReadActivity) this.profilReadActivity = (ProfilReadActivity) context;
+
     }
-
-
 
     @NonNull
     @Override
@@ -85,7 +87,7 @@ public class EntrepriseAdapter extends RecyclerView.Adapter<EntrepriseAdapter.Ar
 
         @Override
         public void onClick(View view) {
-            mainActivity.callEntrepriseActivity(getAdapterPosition());
+            if (context instanceof MainActivity)mainActivity.callEntrepriseActivity(getAdapterPosition());
         }
     }
 }

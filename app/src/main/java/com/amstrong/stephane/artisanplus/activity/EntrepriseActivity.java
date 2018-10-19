@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.PictureAdapter;
+import com.amstrong.stephane.artisanplus.adapter.AdapterPicture;
+import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +30,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class EntrepriseActivity extends AppCompatActivity {
 
@@ -44,8 +48,8 @@ public class EntrepriseActivity extends AppCompatActivity {
     private RatingBar atlierRating;
     private ImageView imgAtelier,imgGerant;
     private TextView txtNomEntr,txtNomPrenom,txtTel1,txtTel2, txtDescriptEntr;
-    private PictureAdapter pictureAdapter;
-    private RecyclerView pictureRecycler;
+    private AdapterPicture adapterPicture;
+    private RecyclerView recyclerPicture;
     private static final String TAG = "EntrepriseActivity";
 
     public static final String keyProfilRead ="profilread_key";
@@ -185,7 +189,7 @@ public class EntrepriseActivity extends AppCompatActivity {
         txtNomPrenom= findViewById(R.id.txt_ger_nom_prenoms);
         txtTel1= findViewById(R.id.txt_ger_tel1);
         txtTel2 = findViewById(R.id.txt_ger_tel2);
-        pictureRecycler = findViewById(R.id.pictures_recycler);
+        recyclerPicture = findViewById(R.id.pictures_recycler);
 
         btnTel1 =findViewById(R.id.btn_ger_tel1);
         btnTel2 =findViewById(R.id.btn_ger_tel2);
@@ -221,12 +225,12 @@ public class EntrepriseActivity extends AppCompatActivity {
             txtTel2.setVisibility(View.GONE);
         }
         txtTel2 .setText(entrepreneur.getLstContact().get(1));
-
-
+        // chercher les entreprises apppartenant à ce entrepreneur
+            entrepreneur.fetchEntreprise(new ResultSet().getLstEntreprise());
         //
-        pictureAdapter = new PictureAdapter(this, lstPicture);
-        pictureRecycler.setAdapter(pictureAdapter);
-        pictureRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        adapterPicture = new AdapterPicture(this, lstPicture);
+        recyclerPicture.setAdapter(adapterPicture);
+        recyclerPicture.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
     }
 
     private void loadPhoto(ImageView imageView, int width, int height) {

@@ -16,14 +16,14 @@ import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ButtonViewHolder>{
+public class AdapterPicture extends RecyclerView.Adapter<AdapterPicture.ButtonViewHolder>{
     Context context;
     LayoutInflater layoutInflater;
     int picture;
     List<Integer> lstPicture;
     View view;
 
-    public PictureAdapter(Context context, List<Integer> lstPicture) {
+    public AdapterPicture(Context context, List<Integer> lstPicture) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.lstPicture = lstPicture;

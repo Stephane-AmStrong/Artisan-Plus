@@ -12,6 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.CardView
             android:id="@+id/block_contact"
             android:layout_width="match_parent"
@@ -60,7 +61,7 @@
                     app:layout_constraintTop_toBottomOf="@id/ico_contact"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/profil_contactRecyclerView"
+                    android:id="@+id/profil_recyclerContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
@@ -131,6 +132,130 @@
                     app:layout_constraintTop_toBottomOf="@id/separator2"/>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_entreprise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/block_sex">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/ico_entreprise"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_business"
+                    android:tint="@color/colorText"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/lbl_entreprise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Mes entreprises"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintStart_toEndOf="@+id/ico_entreprise" />
+
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_entreprise"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/profil_recyclerEntreprise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/separator3"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/block_historique"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="#FFF"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/block_entreprise">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/ico_historique"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_recent"
+                    android:tint="@color/colorText"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/lbl_historique"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:text="Mes récentes consultations"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintStart_toEndOf="@+id/ico_historique" />
+
+                <View
+                    android:id="@+id/separator4"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintTop_toBottomOf="@id/ico_historique"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/profil_recyclerHistorique"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/separator4"/>
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.NestedScrollView>
