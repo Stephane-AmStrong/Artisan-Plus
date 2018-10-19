@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.TelReadAdapter;
+import com.amstrong.stephane.artisanplus.adapter.AdapterEntreprise;
+import com.amstrong.stephane.artisanplus.adapter.AdapterTelRead;
 import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
@@ -28,11 +30,13 @@ public class ProfilReadActivity extends AppCompatActivity {
     private String userKey = MainActivity.keyUtilisater;
     private ImageView imgProfil;
     private TextView txtSex;
-    private RecyclerView contactRecyclerView;
-    private TelReadAdapter telReadAdapter;
+    private RecyclerView recyclerviewContact, recyclerviewHistorique, recyclerviewEntreprise;
+    private AdapterTelRead adapterTelRead;
+    private AdapterEntreprise adapterHistorique,adapterEntreprise;
     private Menu menu;
     private AppBarLayout mAppBarLayout;
     private Toolbar toolbar;
+    private CardView blockHisotique,blockEntreprise;
 
     public static final String keyUserEdit ="edituser_key";
     public static final String keyEntrepreneurEdit ="editgeran_key";
@@ -119,7 +123,11 @@ public class ProfilReadActivity extends AppCompatActivity {
 
         imgProfil = findViewById(R.id.profil_img);
         txtSex = findViewById(R.id.profil_sex);
-        contactRecyclerView = findViewById(R.id.profil_contactRecyclerView);
+        blockHisotique = findViewById(R.id.block_historique);
+        blockEntreprise = findViewById(R.id.block_entreprise);
+        recyclerviewContact = findViewById(R.id.profil_recyclerContact);
+        recyclerviewHistorique = findViewById(R.id.profil_recyclerHistorique);
+        recyclerviewEntreprise = findViewById(R.id.profil_recyclerEntreprise);
     }
 
     private void load(){
@@ -141,13 +149,24 @@ public class ProfilReadActivity extends AppCompatActivity {
     }
 
     private void load(Utilisateur utilisateur){
+        blockEntreprise.setVisibility(View.GONE);
+
         imgProfil.setImageResource(utilisateur.getPhoto());
         setTitle(utilisateur.getNom()+" "+ utilisateur.getPrenom());
         txtSex.setText(utilisateur.getSex());
 
-        telReadAdapter = new TelReadAdapter(this,utilisateur.getLstContact());
-        contactRecyclerView.setAdapter(telReadAdapter);
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapterTelRead = new AdapterTelRead(this,utilisateur.getLstContact());
+        recyclerviewContact.setAdapter(adapterTelRead);
+        recyclerviewContact.setLayoutManager(new LinearLayoutManager(this));
+
+        if (utilisateur.getHistorique().size()>0){
+            adapterHistorique = new AdapterEntreprise(this,utilisateur.getHistorique());
+            recyclerviewHistorique.setAdapter(adapterHistorique);
+            recyclerviewHistorique.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            blockHisotique.setVisibility(View.GONE);
+        }
+
 
         intent = new Intent(this,ProfilEditlActivity.class);
         intent.putExtra(keyUserEdit,utilisateur);
@@ -159,12 +178,26 @@ public class ProfilReadActivity extends AppCompatActivity {
         setTitle(entrepreneur.getNom()+" "+ entrepreneur.getPrenom());
         txtSex.setText(entrepreneur.getSex());
 
-        telReadAdapter = new TelReadAdapter(this, entrepreneur.getLstContact());
-        contactRecyclerView.setAdapter(telReadAdapter);
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapterTelRead = new AdapterTelRead(this, entrepreneur.getLstContact());
+        recyclerviewContact.setAdapter(adapterTelRead);
+        recyclerviewContact.setLayoutManager(new LinearLayoutManager(this));
+
+        if (entrepreneur.getHistorique().size()>0){
+            adapterHistorique = new AdapterEntreprise(this,entrepreneur.getHistorique());
+            recyclerviewHistorique.setAdapter(adapterHistorique);
+            recyclerviewHistorique.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            blockHisotique.setVisibility(View.GONE);
+        }
+
+        adapterEntreprise = new AdapterEntreprise(this,entrepreneur.getLstEntreprise());
+        recyclerviewEntreprise.setAdapter(adapterEntreprise);
+        recyclerviewEntreprise.setLayoutManager(new LinearLayoutManager(this));
 
         intent = new Intent(this,ProfilEditlActivity.class);
         intent.putExtra(keyEntrepreneurEdit,entrepreneur);
     }
+
+
 
 }

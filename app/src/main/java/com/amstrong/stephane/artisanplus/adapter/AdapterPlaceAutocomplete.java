@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class PlaceAutocompleteAdapter
+public class AdapterPlaceAutocomplete
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 
     private static final String TAG = "PlaceAutocompleteAd";
@@ -58,7 +58,7 @@ public class PlaceAutocompleteAdapter
      *
      * @see android.widget.ArrayAdapter#ArrayAdapter(android.content.Context, int)
      */
-    public PlaceAutocompleteAdapter(Context context, GeoDataClient geoDataClient,
+    public AdapterPlaceAutocomplete(Context context, GeoDataClient geoDataClient,
                                     LatLngBounds bounds, AutocompleteFilter filter) {
         super(context, android.R.layout.simple_expandable_list_item_2, android.R.id.text1);
         mGeoDataClient = geoDataClient;

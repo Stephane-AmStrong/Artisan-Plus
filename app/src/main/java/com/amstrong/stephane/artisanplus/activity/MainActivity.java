@@ -2,8 +2,6 @@ package com.amstrong.stephane.artisanplus.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.EntrepriseAdapter;
-import com.amstrong.stephane.artisanplus.adapter.ButtonAdapter;
+import com.amstrong.stephane.artisanplus.adapter.AdapterEntreprise;
+import com.amstrong.stephane.artisanplus.adapter.AdapterButton;
 import com.amstrong.stephane.artisanplus.data.ResultSet;
 import com.amstrong.stephane.artisanplus.model.Entreprise;
 import com.amstrong.stephane.artisanplus.model.Categorie;
@@ -33,9 +28,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static int colorPrimary,colorPrimaryDark,colorAccent;
-    private EntrepriseAdapter entrepriseAdapter;
-    private ButtonAdapter buttonAdapter;
+    private AdapterEntreprise adapterEntreprise;
+    private AdapterButton adapterButton;
     private RecyclerView artisanRecyclerView;
     private RecyclerView categorieRecyclerView;
     private List<Categorie> lstCategorie;
@@ -137,7 +131,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_business) {
             //business
             //showCustomDialog();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -165,13 +158,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void load(){
-
         //
-        entrepriseAdapter = new EntrepriseAdapter(this, lstEntreprise);
-        buttonAdapter = new ButtonAdapter(this, lstCategorie);
+        adapterEntreprise = new AdapterEntreprise(this, lstEntreprise);
+        adapterButton = new AdapterButton(this, lstCategorie);
 
-        artisanRecyclerView.setAdapter(entrepriseAdapter);
-        categorieRecyclerView.setAdapter(buttonAdapter);
+        artisanRecyclerView.setAdapter(adapterEntreprise);
+        categorieRecyclerView.setAdapter(adapterButton);
 
         artisanRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categorieRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -183,6 +175,8 @@ public class MainActivity extends AppCompatActivity
         intent = new Intent(this,EntrepriseActivity.class);
         intent.putExtra(keyEntreprise, entreprise);
         startActivity(intent);
+
+        utilisateur.addToHistoric(entreprise);
     }
 
     public void addAteliers(int categoriePosition){
@@ -196,43 +190,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void load(List<Entreprise> entreprises){
-        entrepriseAdapter = new EntrepriseAdapter(this, entreprises);
-        artisanRecyclerView.setAdapter(entrepriseAdapter);
-    }
-
-    public void showCustomDialog( View view){
-        TextView txtMessage,btnClose;
-        Button btnSubmit,btnCancel;
-        myDialog.setContentView(R.layout.dialog_message);
-        txtMessage = findViewById(R.id.diag_message);
-        btnClose = findViewById(R.id.diag_btnCancel);
-        btnSubmit = findViewById(R.id.diag_btnOk);
-        btnCancel = findViewById(R.id.diag_btnCancel);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-
-        txtMessage.setText("vous n'avez pas encore de boutique voulez vous souscrire?");
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+        adapterEntreprise = new AdapterEntreprise(this, entreprises);
+        artisanRecyclerView.setAdapter(adapterEntreprise);
     }
 
 

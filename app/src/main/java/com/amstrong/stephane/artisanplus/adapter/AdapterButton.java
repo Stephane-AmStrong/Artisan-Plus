@@ -17,7 +17,7 @@ import com.amstrong.stephane.artisanplus.model.Categorie;
 
 import java.util.List;
 
-public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>{
+public class AdapterButton extends RecyclerView.Adapter<AdapterButton.ButtonViewHolder>{
     private Context context;
     private LayoutInflater layoutInflater;
     private Categorie categorie;
@@ -27,7 +27,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     private SparseBooleanArray selectedItems;
 
 
-    public ButtonAdapter(Context context, List<Categorie> lstCategorie) {
+    public AdapterButton(Context context, List<Categorie> lstCategorie) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.lstCategorie = lstCategorie;

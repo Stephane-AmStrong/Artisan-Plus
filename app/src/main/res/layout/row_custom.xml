@@ -17,32 +17,32 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingLeft="4dp">
+        android:paddingTop="8dp">
 
         <ImageView
-            android:id="@+id/ico_gerant"
+            android:id="@+id/ico_entreprise"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/ic_gerant"
+            android:src="@drawable/ic_business"
+            android:tint="@color/colorText"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/text_gerant"
+            android:id="@+id/lbl_entreprise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:foregroundGravity="center_horizontal"
-            android:text="Gérant"
+            android:text="Mes entreprises"
             android:textStyle="bold"
             android:textColor="@color/colorText"
-            app:layout_constraintStart_toEndOf="@+id/ico_gerant" />
+            app:layout_constraintStart_toEndOf="@+id/ico_entreprise" />
 
         <View
-            android:id="@+id/separator5"
+            android:id="@+id/separator4"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
@@ -50,124 +50,16 @@
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/colorText"
-            app:layout_constraintTop_toBottomOf="@id/ico_gerant"/>
+            app:layout_constraintTop_toBottomOf="@id/ico_entreprise"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ger_img"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/profil_1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/separator5" />
-
-
-        <TextView
-            android:id="@+id/txt_ger_nom_prenoms"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/profil_recyclerEntreprise"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:text="Nom et Prénoms Gérant"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorText"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ger_img"
-            app:layout_constraintTop_toTopOf="@+id/ger_img" />
-
-        <ImageView
-            android:id="@+id/btn_ger_tel1"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_call"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_ger_tel1"/>
-
-        <View
-            android:id="@+id/separator6"
-            android:layout_width="0.1dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:background="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_ger_tel1"
-            app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel1"
-            app:layout_constraintTop_toTopOf="@+id/btn_ger_tel1" />
-
-        <ImageView
-            android:id="@+id/btn_ger_sms1"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_texto"
-            app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel1"
-            app:layout_constraintTop_toTopOf="@+id/btn_ger_tel1"/>
-
-        <TextView
-            android:id="@+id/txt_ger_tel1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="+229 97 99 99 99"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toTopOf="@+id/txt_ger_tel2"
-            app:layout_constraintStart_toEndOf="@+id/ger_img"
-            app:layout_constraintTop_toBottomOf="@+id/txt_ger_nom_prenoms"
-            android:textColor="@color/colorText"/>
-
-        <ImageView
-            android:id="@+id/btn_ger_tel2"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_call"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_ger_tel2" />
-
-        <View
-            android:id="@+id/separator7"
-            android:layout_width="0.1dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:background="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_ger_tel2"
-            app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel2"
-            app:layout_constraintTop_toTopOf="@+id/btn_ger_tel2" />
-
-        <ImageView
-            android:id="@+id/btn_ger_sms2"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_texto"
-            app:layout_constraintEnd_toStartOf="@+id/btn_ger_tel2"
-            app:layout_constraintTop_toTopOf="@+id/btn_ger_tel2" />
-
-
-        <TextView
-            android:id="@+id/txt_ger_tel2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:text="+229 95 76 67 43"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@+id/ger_img"
-            app:layout_constraintStart_toEndOf="@+id/ger_img" />
+            android:layout_marginTop="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/separator4"/>
 
     </android.support.constraint.ConstraintLayout>
 

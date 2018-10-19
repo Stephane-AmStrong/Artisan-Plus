@@ -63,7 +63,7 @@ public class ResultSet {
     public List<Entrepreneur> getEntrepreneur(){
         for (int i =0;i<imgGerant.length;i++){
             entrepreneur =new Entrepreneur(imgGerant[i],ids[i], nomUser[i], prenUser[i], sexUser[i], tel1User[i],pwdGerant[i]);
-            entrepreneur.ajouter(tel2User[i]);
+            entrepreneur.addTel(tel2User[i]);
             lstEntrepreneur.add(entrepreneur);
         }
         lstUser.addAll(lstEntrepreneur);
@@ -142,5 +142,6 @@ public class ResultSet {
     public List<Categorie> getLstCategorie() {
         return lstCategorie;
     }
+
 
 }

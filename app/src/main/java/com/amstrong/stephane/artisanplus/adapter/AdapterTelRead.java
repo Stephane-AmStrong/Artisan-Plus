@@ -13,7 +13,7 @@ import com.amstrong.stephane.artisanplus.activity.ProfilReadActivity;
 
 import java.util.List;
 
-public class TelReadAdapter extends RecyclerView.Adapter<TelReadAdapter.TelReadViewHolder>{
+public class AdapterTelRead extends RecyclerView.Adapter<AdapterTelRead.TelReadViewHolder>{
     private Context context;
     private LayoutInflater layoutInflater;
     private List<String> lstContact;
@@ -22,7 +22,7 @@ public class TelReadAdapter extends RecyclerView.Adapter<TelReadAdapter.TelReadV
     private ProfilReadActivity profilReadActivity;
 
 
-    public TelReadAdapter(Context context, List<String> lstContact) {
+    public AdapterTelRead(Context context, List<String> lstContact) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         this.lstContact = lstContact;

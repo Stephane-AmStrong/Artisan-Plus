@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.amstrong.stephane.artisanplus.R;
-import com.amstrong.stephane.artisanplus.adapter.TelEditAdapter;
+import com.amstrong.stephane.artisanplus.adapter.AdapterTelEdit;
 import com.amstrong.stephane.artisanplus.model.Entrepreneur;
 import com.amstrong.stephane.artisanplus.model.Utilisateur;
 
@@ -29,7 +29,7 @@ public class ProfilEditlActivity extends AppCompatActivity {
     private EditText txtNom,txtPren;
     private Spinner txtSex;
     private RecyclerView contactRecyclerView,atelierRecyclerView;
-    private TelEditAdapter  telEditAdapter;
+    private AdapterTelEdit adapterTelEdit;
     private AppBarLayout mAppBarLayout;
     private Toolbar toolbar;
     private CardView blockAtelier;
@@ -83,8 +83,8 @@ public class ProfilEditlActivity extends AppCompatActivity {
         txtPren.setText(utilisateur.getPrenom());
         setSpinText(txtSex,utilisateur.getSex());
 
-        telEditAdapter = new TelEditAdapter(this,utilisateur.getLstContact());
-        contactRecyclerView.setAdapter(telEditAdapter);
+        adapterTelEdit = new AdapterTelEdit(this,utilisateur.getLstContact());
+        contactRecyclerView.setAdapter(adapterTelEdit);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         blockAtelier.setVisibility(View.GONE);
@@ -96,8 +96,8 @@ public class ProfilEditlActivity extends AppCompatActivity {
         txtPren.setText(entrepreneur.getPrenom());
         setSpinText(txtSex,entrepreneur.getSex());
 
-        telEditAdapter = new TelEditAdapter(this, entrepreneur.getLstContact());
-        contactRecyclerView.setAdapter(telEditAdapter);
+        adapterTelEdit = new AdapterTelEdit(this, entrepreneur.getLstContact());
+        contactRecyclerView.setAdapter(adapterTelEdit);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Log.d(TAG, "load: entrepreneur nb contact : "+entrepreneur.getLstContact().size());
